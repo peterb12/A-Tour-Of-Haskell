@@ -134,28 +134,38 @@ We know that 6 is an _even_ number, so we want `isOddNumber 6` to return `False`
 
 If on the other hand we called `isOddNumber 7`, then we'd subtitute `7` for `num`, giving `rem 7 2 /= 0`.  `rem 7 2` is going to evaluate to `1` (because **7 divided by 2 equals 3, remainder 1**), which leaves us with `1 /= 0`, or in English, "1 is not equal to 0". This is true, so `isOddNumber 7` returns `True`, which is again what we expected.
 
-Run the program and test in the REPL to make sure I'm not making a mistake. We did it!
+One question you might have: how does Haskell know to evaluate the `rem` before the `/=`? There is an order of operations, as in math, but it's pretty easy to get it wrong! So if we wanted to be extra-safe, we could use parentheses to make _extra-sure_ that the expression is evaluated the way we want it to. Like so:
+
+```isOddNumber num = (rem num 2) /= 0```
+
+When in doubt, add parentheses!
+
+Run the program and test in the REPL to check for yourself. We did it!
 ## Homework 1: Fahrenheit to Celsius 
-The function called `ftoc` on **line 13** is wrong! You need to change it by writing an expression that takes a temperature in Fahrenheit, and converts it to Celsius. The formula to convert fahrenheit to celsius is: _The temperature in degrees Fahrenheit minus 32, times 5/9_
+Write a function to convert a temperature in Fahrenheit to Celsius.
 
-For example: 32 degrees fahrenheit minus 32 is 0. 0 times 5/9 is 0. 0 celsius is the answer.
+In the **class program** the function called `ftoc` on **line 13** is wrong! You need to change it by writing an expression that takes a temperature in Fahrenheit, and converts it to Celsius. The mathematical formula to convert Fahrenheit to Celsius is: _The temperature in degrees Fahrenheit minus 32, times 5/9_
 
-Your task: replace "0.0" in the function definition below, on the right side of the = sign, with an expression that does this conversion. You may need to use some parentheses to make sure the operations are evaluated in the proper order, just like in your math class.
+For example, if you were doing this on paper: 52 degrees fahrenheit minus 32 is 20. 20 times 5/9 is 11.11. 11.11 Celsius is the answer.
+
+Your task: replace `0.0` on **line 13 of the class program**, on the right side of the = sign, with an expression that does this conversion. You may need to use some parentheses to make sure the operations are evaluated in the proper order, just like in your math class.
 
 If you've done this correctly, all three of the temperature tests should pass when you click or touch "run".  If you encounter an error, try reading it and understanding it. If you still have trouble, bring it up on Google Classroom and we'll work through it with you.
 
 ## Homework 2: Is it a Leap Year?
-The function called `isLeapYear` on **line 15** (it may have moved lower depending on how long your ftoc function was) is wrong! You need to replace `True` with a function that takes a year and returns True or False depending on whether the passed in year (named `yr`) is a leap year.
+Write an expression to determine if a given year is a leap year.
 
-Calculating leap years is surprisingly tricky! Most of think it's just "any year that's divided by 4 is a leap year, but there's more to it than that.  The actual definition is:
+TThe function called `isLeapYear` on **line 15** (it may have moved lower depending on how long your ftoc function was) takes a year as input (called `yr`), and returns `True` or `False` as output - but as currently written, it's wrong. You need to replace the current expression (`True`) with an expression that takes the input year and returns `True` or `False` depending on whether `yr` is a leap year.
+
+Calculating leap years is surprisingly tricky! Most people think that "any year that's divided by 4 is a leap year," but there's more to it than that.  The actual definition is:
 
 A year is a leap year if it is evenly divisible by 4, EXCEPT that years evenly divisible by 100 are not leap years, UNLESS those divisible-by-100 leap years are ALSO evenly divisible by 400.
 
 There are a lot of ways to write this function, but many of them use syntax that you haven't been introduced to yet.  I'm going to introduce two more operators that you will probably need to use to write this:
 
-`&&`: pronounced "and", this returns `True` if both arguments are `True` and `False` otherwise.  So for example, `1 < 5 && 2 < 5` is `True` but `1 < 5 && 100 < 5` is `False`
+`&&`: pronounced "and", this returns `True` if both arguments are `True` and `False` otherwise.  So for example, `(1 == 1) && (2 == 2)` is `True` but `(1 == 1) && (2 == 3)` is `False`
 
-`||`: pronounced "or", this returns `True` if ANY of its arguments are `True`, and `False` only if both are false.  So `1 < 5 || 100 < 5` is `True` but `100 < 5 || 200 < 5` is `False`
+`||`: pronounced "or", this returns `True` if ANY of its arguments are `True`, and `False` only if both are false.  So `(1 == 5) || (100 == 100)` is `True` but `(1 == 5) || (2 == 5)` is `False`
 
 When you're done, this expression is going to look pretty complicated, but if you take it a step at a time, you should be fine. Remember to use parentheses where appropriate to keep the order of operations straight in your head, just like you do in math class.
 
