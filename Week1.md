@@ -12,7 +12,7 @@ A note on typography: when you see numbers or words that look `like this`, that 
 
 One last note: the goal of this class is to teach you about basic computer science patterns, in the context of a weird programming language. When you're done with this class, you will be able to impress people at parties with your amazing knowledge of obscure computer programming languages. There are no grades, and the only reason to do this is because you want to.  In the course of the class, you may find yourself getting stuck on some of the homework assignments. You can get yourself unstuck _any way you want_: ask your teachers, talk to your friends who are taking the class, read a Haskell book. Most of the homework assignments here are very well-known problems. You can undoubtedly do Google searches to find answers to them, and nobody is going to bust you for it. The only thing I suggest is that if you do that, _take your time and try to understand the answer that you're finding_. If you google for the answers in the early weeks without understanding them, you'll be completely lost in the following weeks.
 ## Expressions
-Before anything else, make sure you **go to the class program window and click (or touch) the "Run" button**.  The examples in this document **will not work if you don't do that.**
+Before anything else, make sure you **go to the class program window and click (or tap) the "Run" button**.  The examples in this document **will not work if you don't do that.**
 Most of the things we type are called _expressions_. An expression is any combination of symbols that can be simplified to a _value_. You can think of a value as any expression that is in its simplest form.
 
 For example, go there now and type `123` and hit enter.  Haskell should reply with
@@ -116,7 +116,7 @@ Change the function definition on **line 11** to:
 
 (What this expression is saying is "isOddNumber num means the remainder of some number divided by 2".)
 
-Now **click or touch run**, and in the REPL try a few tests, such as `isOddNumber 7` and `isOddNumber 100`.  Do you get `True` or `False`?
+Now **click or tap run**, and in the REPL try a few tests, such as `isOddNumber 7` and `isOddNumber 100`.  Do you get `True` or `False`?
 
 No!  We're not done yet.  What we get back is the remainder, which in this case is always 0 or 1, and this isn't what we wanted.  To convert this to a boolean, we need to compare it. There are lots of comparisons in Haskell, but the two we care about right now are:
 
@@ -150,7 +150,7 @@ For example, if you were doing this on paper: 52 degrees fahrenheit minus 32 is 
 
 Your task: replace `0.0` on **line 13 of the class program**, on the right side of the = sign, with an expression that does this conversion. You may need to use some parentheses to make sure the operations are evaluated in the proper order, just like in your math class.
 
-If you've done this correctly, all three of the temperature tests should pass when you click or touch "run".  If you encounter an error, try reading it and understanding it. If you still have trouble, bring it up on Google Classroom and we'll work through it with you.
+If you've done this correctly, all three of the temperature tests should pass when you click or tap "run".  If you encounter an error, try reading it and understanding it. If you still have trouble, bring it up on Google Classroom and we'll work through it with you.
 
 ## Homework 2: Is it a Leap Year?
 Write an expression to determine if a given year is a leap year.
@@ -163,10 +163,12 @@ A year is a leap year if it is evenly divisible by 4, EXCEPT that years evenly d
 
 There are a lot of ways to write this function, but many of them use syntax that you haven't been introduced to yet.  I'm going to introduce two more operators that you will probably need to use to write this:
 
-`&&`: pronounced "and", this returns `True` if both arguments are `True` and `False` otherwise.  So for example, `(1 == 1) && (2 == 2)` is `True` but `(1 == 1) && (2 == 3)` is `False`
+`&&`: pronounced "and", will return `True` if both arguments are `True` but `False` otherwise.  So for example, `(1 == 1) && (2 == 2)` is `True` but `(1 == 1) && (2 == 3)` is `False`
 
-`||`: pronounced "or", this returns `True` if ANY of its arguments are `True`, and `False` only if both are false.  So `(1 == 5) || (100 == 100)` is `True` but `(1 == 5) || (2 == 5)` is `False`
+`||`: pronounced "or", will return `True` if ANY of its arguments are `True` but `False` only if both are false.  So `(1 == 5) || (100 == 100)` is `True` but `(1 == 5) || (2 == 5)` is `False`
 
 When you're done, this expression is going to look pretty complicated, but if you take it a step at a time, you should be fine. Remember to use parentheses where appropriate to keep the order of operations straight in your head, just like you do in math class.
+
+If you've done this correctly, all four of the leap year tests should pass when you click or tap "run". If you encounter an error, try reading it and understanding it. If you still have trouble, bring it up on Google Classroom and we'll work through it with you.
 
 **Good luck!**
