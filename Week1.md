@@ -170,7 +170,8 @@ In the **class program** the function called `ftoc` on **line 13** is wrong! You
 
 For example, if you were doing this on paper: 52 degrees fahrenheit minus 32 is 20. 20 times 5/9 is 11.11. 11.11 Celsius is the answer.  Let me rephase that in more mathy terms:  
 
-```(52°F - 32 == 20). 
+```
+(52°F - 32 == 20). 
 20 * (5/9) == 11.11.
 11.11°C
 ```
