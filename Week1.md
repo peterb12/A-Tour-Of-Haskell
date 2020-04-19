@@ -172,7 +172,8 @@ For example, if you were doing this on paper: 52 degrees fahrenheit minus 32 is 
 
 ```(52°F - 32 == 20). 
 20 * (5/9) == 11.11.
-11.11°C```
+11.11°C
+```
 
 Your task: replace `0.0` on **line 13 of the class program**, on the right side of the = sign, with an expression that does this conversion. You may need to use some parentheses to make sure the operations are evaluated in the proper order, just like in your math class.
 
