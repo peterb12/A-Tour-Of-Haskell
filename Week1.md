@@ -92,6 +92,11 @@ If you type `plusOne 5` into the REPL (the capitalization matters!) what you get
 
 Notice the `x` to the left of the `=` sign in the definition of `plusOne`.  We say that when we called `plusOne 5`, x is _bound_ to the argument 5.  So on the right side of the = sign, the expression  becomes "5 + 1", which reduces to 6. This is a little different than the sort of naming we do when writing our expressions and functions, because `plusOne` can be used with all sorts of arguments. If we call `plusOne 10` then x will be bound to the argument 10 for the duration of that call.  If we call `plusOne 5 + 100 + 200`, then x will be bound to the value `305`.
 
+Here's a visual example of what's happening.
+
+![A function, metaphorically](resources/plusOne.gif "A function, metaphorically")
+
+
 In most programming languages, we would say that the "5" is an input to the function `plusOne`. We might call it a _parameter_ or an _argument_ to the function. If you've programmed in Python, you're probably used to function arguments being fed in to a function by appearing in parentheses, like this:
 
 `plusOne(5)`
