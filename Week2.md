@@ -54,54 +54,105 @@ checkName = if (myName == "Lydia")
             else "Don't know!"
 ```
 
-Let's write our nucleotide example.  It sounds pretty easy, doesn't it?  Let's see, if we get an `A` then return a `T`.  Ok.  We can compare characters with `==`, just like we compared numbers last week, so how about this?  Let's name the input character `n` in our function and start writing.
+#### Worked Example: The Vowel Game, with `if…then…else`
 
-One note: since this function is looking at _individual characters_, we need to enclose them in single-quotes, like this: `'A'`, NOT in double-quotes.
+Let's say we're playing a word game where the goal is to play words with lots of vowels.  In this game, the vowels A, E, I, O, and U are worth 2, 1, 3, 4, and 5 points respectively; all other letters are worth 0.  As part of writing a computer version of this game, we want a function that will tell us the score for a particular letter.
 
 ```
-nucleotideUsingIf n = if (n == 'A') then 'T'
-
+letterScoreUsingIf letter = if (letter == 'A') then 2
 ```
 
 We're not done yet, though - this won't even compile! Remember, the `else` clause is *mandatory*
 
 
 ```
-nucleotideUsingIf n = if (n == 'A') then 'T'
-                       else
+letterScoreUsingIf letter = if (letter == 'A') then 2
+                              else
 ```
 
-Hmmm.  Else what?  Well, we know if we were given a `T`, we need to return an `A`.
+Of course, the letter might not be an `'A'`, so we have to write _another_ if to handle the next case:
+
+```
+letterScoreUsingIf letter = if (letter == 'A') then 2
+                              else if (letter == 'E') then 1
+                                else
+```
+
+And we do this several more times:
 
 
 ```
-nucleotideUsingIf n = if (n == 'A') then 'T'
-                       else if (n == 'T') then 'A'
-                            else 
+letterScoreUsingIf letter = if (letter == 'A') then 2
+                              else if (letter == 'E') then 1
+                                else if (letter == 'I') then 3
+                                  else if (letter == 'O') then 4
+                                    else if (letter == 'U') then 5
+                                      else 0
 ```
 
-And of course we have to compare the rest of the cases, too.
+Note our final `else` clause, which will handle any letter that isn't a vowel.
 
-```
-nucleotideUsingIf n = if (n == 'A') then 'T'
-                       else if (n == 'T') then 'A'
-                            else if (n == 'C') then 'G'
-                                else if (n == 'G') then 'C'
-                                   else 'X'  
-```
 Now we can try it in the REPL:
 
 ```
-nucleotideUsingIf 'G'
-=> 'C'
-nucleotideUsingIf 'F'
-=> 'X'
+letterScoreUsingIf 'O'
+=> 4
+letterScoreUsingIf 'X'
+=> 0
 ```
 
+So as you can see, if statements are pretty simple, but they have some drawbacks - in particular, if you need to nest several conditions in a row, they can be a bit hard to read.  We'll learn some alternatives to `if` after your first homework.
+
+## Homework 1: Nucleotides, Using If
+Let's write our nucleotide example.  It sounds pretty easy, doesn't it?  The letter score example should give you a pretty good sense of how to proceed.  Don't forget to handle the case where the input character is not one of the recognized nucleotides.
+
+One note: since this function is looking at _individual characters_, remember to enclose them in single-quotes, like this: `'A'`, NOT in double-quotes.
 
 ### Pattern Matching
 
-### Guards
+So far, every time we've written a function, we've written it one time and never re-used the name.  Furthermore, when defining the parameters to the function, we've just given it a single name (like `n` in the above example) and then adjusted our code inside the function to deal with the fact that the parameter could contain any argument.
+
+Haskell lets us do something really powerful, though: it lets us write functions for _specific_ arguments, by effectively writing the function multiple times - with a different function body for each argument.
+
+#### Worked Example: The Vowel Game, Pattern Matching.
+
+We're going to write our letter score function again, only this time instead of using a deeply-nested `if` statements, we're going to use pattern matching.
+
+The first case we need to handle is the vowel `'A'`.  Our rules say that `'A'` is worth 2 points.
+
+```
+letterScorePM 'A' = 2
+```
+
+That's it!  Note that instead of giving the function parameter a name like item or x or number, we specified a _literal `'A'` character_ as the function parameter.  This means that this function will _only_ run when the argument to it is `'A'`.
+
+Let's write the rest of the functions.  I bet you can see how this will go.
+
+```
+letterScorePM 'A' = 2
+letterScorePM 'E' = 1
+letterScorePM 'I' = 3
+letterScorePM 'O' = 4
+letterScorePM 'U' = 5
+```
+
+That handles all of our vowels.  But we still need to handle the case where the function is called with anything else.  In Haskell, `_` in a function parameter means "I don't care, I'm going to ignore this," so we can use that here to handle all the other cases.
+
+
+```
+letterScorePM 'A' = 2
+letterScorePM 'E' = 1
+letterScorePM 'I' = 3
+letterScorePM 'O' = 4
+letterScorePM 'U' = 5
+letterScorePM  _  = 0
+```
+
+That's it! Try it out in the REPL
+
+### Homework 2: Nucleotides, Using Pattern Matching
+
+Please write a new version of the nucleotide function you wrote for Homework 1. This time, don't use if, and instead use pattern matching to accomplish the task.
 
 
 ## A Word About Error Messages
