@@ -2,13 +2,53 @@
 
 Welcome to week 2!  This week is going to start easy, but will finish up introducing some simple techniques that will help us solve more complicated problems.
 
+This week is probably going to be easier than last week. The reason for this is that I'm introducing three things to you that do essentially the same job.  The differences in syntax between them are in some cases subtle, so pay attention as you write them and see if you can understand when you might use one instead of another.
+
+We're also going to give you a very quick preview of a new data structure: the list.
+
+The REPL for this week's exercise is here: https://repl.it/@peterb/Conditionals
+
+Please Fork your own copy of the REPL and then follow along with this document.
+
+## A Word About Error Messages
+
+Last week some of you encountered what I consider to be the very worst thing about Haskell - its error messages. There's no getting around this - all programmers make mistakes sometimes, and when we do, we're going to get an error message. I want to take some of our time to look at an example of an error message and how to read it.
+
+Haskell's error messages tend to be very, very long and very wordy. There's a technical reason for this, which is that the language tries to protect you from making a certain class of mistake called a type error by requiring all types in your program to match, but it also tries to _guess_ what type you mean where possible. This prevents you (for example) from using a Boolean in a place where an Integer was expected.  Let's take a simple example.
+
+If you remember last week, we had this function, `complicatedFourteen = 1 + 5 + 8`.  What if instead we wrote, `complicatedFourteen = 1 + 5 + True`?
+
+We'd get this error message:
+
+```
+main.hs:7:23: error:
+    * No instance for (Num Bool) arising from a use of `+'
+    * In the expression: 1 + 5 + True
+      In an equation for `complicatedFourteen':
+          complicatedFourteen = 1 + 5 + True
+  |
+7 | complicatedFourteen = 1 + 5 + True
+  |                       ^^^^^^^^^^^^
+<interactive>:3:1: error:
+    * Variable not in scope: main
+    * Perhaps you meant `min' (imported from Prelude)
+```
+
+That's a lot of text for an error that you already understand!  The most important part is probably the very first line, which tells us that the problem began on line 7.  Then `No instance for (Num Bool) arising from a use of "+"` is telling us, awkwardly, that `+` expects a Num (which includes both Ints and Doubles), but instead got a Bool, and there's no Number instance for the type Bool.  The reason the error message is so complicated is that we can make very complicated types, and Haskell will try to infer what we mean as much as possible. This verbose error is more helpful when you're working with more general types, but can be frustrating in the simpler cases. 
+
+the last 3 lines of the error message are effectively meaningless - the earlier error confused the compiler, so it no longer knew what to do with the rest of the program.  
+
+It's generally a good idea to deal with your errors from the top down - fix the first thing you find, then click 'Run' again and go on to the next one.
+
 ## Making Decisions
 
 Last week all of the expressions we wrote were very straightforward. Given an input value, the computer could find the answer by just repeatedly simplifying the expression.
 
-But sometimes our expressions need to be more complicated than that. We may want to make different decisions about our answer depending on what in our environment is true.  Today we're going to look at three different ways to make decisions in our program:  Conditionals, Pattern Matching, and Guards.
+But sometimes our expressions need to be more complicated than that. We may want to make different decisions about our answer depending on what in our environment is true.  Today we're going to look at two different ways to make decisions in our program:  Conditionals and Pattern Matching.  (There are actually at least four techniques - "guards" and "case expressions", but we're not going to go into them here. Feel free to look them up yourself later if you're interested.)
 
-All three of these techniques will be useful at different times. You can often rewrite code written one way so that it uses the other.  Which you use often depends on which is easiest to write, or to read and understand.
+Both of these techniques will be useful at different times. You can often rewrite code written one way so that it uses the other.  Which you use often depends on which is easiest to write, or to read and understand.
+
+More generally, this aspect of Haskell is something that is both good and bad.  The bad thing is that for any task, there's more than one way to do it. The good thing is _also_ that for any task, there's more than one way to do it.
 
 ### Our Example: DNA Nucleotides
 
@@ -106,6 +146,8 @@ So as you can see, if statements are pretty simple, but they have some drawbacks
 ## Homework 1: Nucleotides, Using If
 Let's write our nucleotide example.  It sounds pretty easy, doesn't it?  The letter score example should give you a pretty good sense of how to proceed.  Don't forget to handle the case where the input character is not one of the recognized nucleotides.
 
+Fill in the function `nucleotideIf` in the REPL, replacing the current return value ('Z') with a program that returns the proper value.
+
 One note: since this function is looking at _individual characters_, remember to enclose them in single-quotes, like this: `'A'`, NOT in double-quotes.
 
 ### Pattern Matching
@@ -148,49 +190,59 @@ letterScorePM 'U' = 5
 letterScorePM  _  = 0
 ```
 
-That's it! Try it out in the REPL
+That's it! Try it out in the REPL.
 
 ### Homework 2: Nucleotides, Using Pattern Matching
 
 Please write a new version of the nucleotide function you wrote for Homework 1. This time, don't use if, and instead use pattern matching to accomplish the task.
 
+### Editorial Comment
 
-## A Word About Error Messages
+Pattern matching is probably _the single most important syntax you'll learn in Haskell_.  It actually does more than we are telling you here.  It's not just a fancy conditional, but also is the **primary way** that we break down complex data structures to allow us to write easier functions. Since we don't have any complex data structures yet, you're not seeing this side of it.  But if you remember one thing from this chapter, make it pattern matching.  Pattern matching should always be the first technique you reach for when solving problems in Haskell. It won't always apply, but when it does it will usually be the best way.
 
-Last week some of you encountered what I consider to be the very worst thing about Haskell - its error messages. There's no getting around this - all programmers make mistakes sometimes, and when we do, we're going to get an error message. I want to take some of our time to look at an example of an error message and how to read it.
+## Lists
 
-Haskell's error messages tend to be very, very long and very wordy. There's a technical reason for this, which is that the language tries to protect you from making a certain class of mistake called a type error by requiring all types in your program to match, but it also tries to _guess_ what type you mean where possible. This prevents you (for example) from using a Boolean in a place where an Integer was expected.  Let's take a simple example.
+We've been talking about DNA here, but when we wrote our progams, we've just been manipulating genes a single gene at a time.  But people's DNA is composed of _many_ genes, not just one. How do we represent that in Haskell?
 
-If you remember last week, we had this function, `complicatedFourteen = 1 + 5 + 8`.  What if instead we wrote, `complicatedFourteen = 1 + 5 + True`?
+You won't be surprised to hear me say "There's more than one way to do it", but one of the most fundamental data structures in Computer Science, and one that is used a lot when teaching programmers, is the _list_.  Next week we are going to be spending a lot of time with lists. For this week, I wanted to give you just the briefest introduction to them.
 
-We'd get this error message:
+A list in casual conversation has a simple definition: a collection of items, in a specific order.  The formal definition is a little more involved, and in English is this:
+
+> A _list of some type t_ is either:  [] ("the empty list") **or** an object of type t put onto the front of another list of some type t.
+
+The operator we use to build a list is `:`.  This is pronounced `cons`, which is short for "constructor", for historical reasons.  When the above defintiion says "put onto the front of another list" that means we take the item we want to add to the front of the list, and use `:` to do it.
+
+Let's say we're working with lists of Ints, and we want to end up with a list of the numbers 1, 2, and 3, in that order.  There are very simple ways to do this, but let's do it the **hard** way first.
+
+The funny thing about the definition above is that it says you can only build a list _if you already have another list_.  The number "3" by itself _isn't a list_.  It's only a list if you attach that number to a list.
+
+Fortunately, there's something that is always a list, that appears in every list: the empty list, or `[]`.  So we can put 3 onto the empty list, like so:
 
 ```
-main.hs:7:23: error:
-    * No instance for (Num Bool) arising from a use of `+'
-    * In the expression: 1 + 5 + True
-      In an equation for `complicatedFourteen':
-          complicatedFourteen = 1 + 5 + True
-  |
-7 | complicatedFourteen = 1 + 5 + True
-  |                       ^^^^^^^^^^^^
-<interactive>:3:1: error:
-    * Variable not in scope: main
-    * Perhaps you meant `min' (imported from Prelude)
+3 : []
 ```
 
-That's a lot of text for an error that you already understand!  The most important part is probably the very first line, which tells us that the problem began on line 7.  Then `No instance for (Num Bool) arising from a use of "+"` is telling us, awkwardly, that `+` expects a Num (which includes both Ints and Doubles), but instead got a Bool, and there's no Number instance for the type Bool.  The reason the error message is so complicated is that we can make very complicated types, and Haskell will try to infer what we mean as much as possible. This verbose error is more helpful when you're working with more general types, but can be frustrating in the simpler cases. 
+If you type this into the REPL, you'll get back
 
-the last 3 lines of the error message are effectively meaningless - the earlier error confused the compiler, so it no longer knew what to do with the rest of the program.  
+```
+=> [3]
+```
 
-It's generally a good idea to deal with your errors from the top down - fix the first thing you find, then click 'Run' again and go on to the next one.
+And we can extend this logic to all the numbers we want:
 
-Recursion - When Looping Is Just Not Enough Work
-Base Cases
-Recursive Cases
-Putting it all together
-Why not just use for loops? Do you just hate convenience?
-Worked Example 1 - Count to a number
-Worked Example 2 - Fibonacci sequence
-Homework - Sum the digits of a number
-Homework - Implement multiplication through repeated addition
+```
+1 : 2 : 3 : []
+=> [1, 2, 3]
+```
+
+In fact, we can simply type `[1, 2, 3]` if we want that list, and it will work fine - Haskell knows what we mean.  But _under the hood_, keep in mind that that list represents `1 : 2 : 3: []`, because next week it's going to be _very important_ that we remember that the empty list is there.
+
+### Homework 3: Writing a List
+
+In your REPL are two names, `myLongDNA` and `myLongComp`, both currently set to the empty list.
+
+In `myLongDNA`, write a list of 6 valid nucleotides - they can be whatever you want, as long as they are one of the four nucleotides `A`, `C`, `T`, and `G`.  Write this list in the `[1, 2, 3]` list syntax we just discussed.
+
+In `myLongComp`, write a list of 6 nucleotides that complement the 6 nucleotides you chose for `myLongDNA`.  Please write this list in the `1 : 2 : 3 : []` format.
+
+As always, if you have any questions, feel free to post them on Google Classroom!
