@@ -223,7 +223,7 @@ A list in casual conversation has a simple definition: a collection of items, in
 
 > A _list of some type t_ is either:  [] ("the empty list") **or** an object of type t put **onto the front of another list** of some type t.
 
-One implication of this definition is that a list can only hold objects of one type.  [1, 2, 3, 4] is a list.  ['A', 'B', 'C', 'D'] is a list.  but [1, 'A', 2, '3'] is not a list, and can't be built.  (There *are* ways to build lists that contain all of those items, but you can to use another data structure, the tuple, that we haven't introduced yet)
+One implication of this definition is that a list can only hold objects of one type.  `[1, 2, 3, 4]` is a list.  `['A', 'B', 'C', 'D']` is a list.  but `[1, 'A', 2, 'B']` is not a list, because it contains multiple types, and can't be built.  (There *are* ways to build lists that contain all of those items, but you can to use another data structure, the tuple, that we haven't introduced yet)
 
 The operator we use to build a list is `:`.  This is pronounced `cons`, which is short for "constructor", for historical reasons.  When the above defintiion says "put onto the front of another list" that means we take the item we want to add to the front of the list, and use `:` to do it.  
 
