@@ -44,17 +44,17 @@ It's generally a good idea to deal with your errors from the top down - fix the 
 
 Last week all of the expressions we wrote were very straightforward. Given an input value, the computer could find the answer by just repeatedly simplifying the expression.
 
-But sometimes our expressions need to be more complicated than that. We may want to make different decisions about our answer depending on what in our environment is true.  Today we're going to look at two different ways to make decisions in our program:  Conditionals and Pattern Matching.  (There are actually at least four techniques - "guards" and "case expressions", but we're not going to go into them here. Feel free to look them up yourself later if you're interested.)
+But sometimes our expressions need to be more complicated than that. We may want to make different decisions about our answer depending on what in our environment is true.  Today we're going to look at two different ways to make decisions in our program:  Conditionals and Pattern Matching.  (There are actually at least two other techniques that do the same thing as conditionals - _guards_ and _case expressions_, but we're not going to go into them here. Feel free to look them up yourself later if you're interested.)
 
-Both of these techniques will be useful at different times. You can often rewrite code written one way so that it uses the other.  Which you use often depends on which is easiest to write, or to read and understand.
+Both of these techniques will be useful at different times. You can often rewrite code written one way so that it uses the other technique.  Which you use often depends on which is easiest to write, or to read and understand.
 
 More generally, this aspect of Haskell is something that is both good and bad.  The bad thing is that for any task, there's more than one way to do it. The good thing is _also_ that for any task, there's more than one way to do it.
 
 ### Our Example: DNA Nucleotides
 
-If you've taken a biology course that talks about DNA, you may know about nucleotides; these are the proteins that make up our genes.  The proteins fit together in a very specific way so that when a DNA (or RNA) molecule is created, it always fits together. We say that the nucleotide that "plugs into" another nucleotide is its _complement_.
+If you've taken a biology course that talks about DNA, you may know about nucleotides; these are the molecules that make up our genes.  The molecules fit together in a very specific way so that when a DNA (or RNA) molecule is created, it always fits together. We can say that the nucleotide that "plugs into" another nucleotide is its _complement_.
 
-There are four types of Nucleotides: Adenine, Guanine, Thymine, and Cystine.  For convenience, let's call these `'A'`, `'G'`, `'T'`, and `'C'`. (There's actually a `'U'` for RNA as well, but let's ignore that one for now).
+There are four types of Nucleotides: adenine, guanine, thymine, and cystine.  For convenience, let's call these `'A'`, `'G'`, `'T'`, and `'C'`. (There's actually a `'U'` for RNA as well, but let's ignore that one for now).
 
 The rules of complement are as follows:
 
@@ -83,16 +83,18 @@ def checkName = if (myName == "Lydia"):
 Haskell's syntax is similar, but with a wrinkle: there must _always_ be an `else` part of the expression, because without it the expression would not evaluate to anything.  So we'd have to write the above example like this:
 
 ```
-checkName = if (myName == "Lydia") then "Hi, Lydia!" else "Don't know!"
+checkName myName = if (myName == "Lydia") then "Hi, Lydia!" else "Sorry, I don't talk to strangers."
 ```
 
 Sometimes it can also be helpful to format your if statements to make them easier to read.  This code is the same as the last example, just written differently:
 
 ```
-checkName = if (myName == "Lydia")
+checkName myName = if (myName == "Lydia")
             then "Hi, Lydia!"
-            else "Don't know!"
+            else "Sorry, I don't talk to strangers."
 ```
+
+(This program is in your REPL; try it out.)
 
 #### Worked Example: The Vowel Game, with `if…then…else`
 
@@ -107,7 +109,7 @@ We're not done yet, though - this won't even compile! Remember, the `else` claus
 
 ```
 letterScoreUsingIf letter = if (letter == 'A') then 2
-                              else
+                              else 0
 ```
 
 Of course, the letter might not be an `'A'`, so we have to write _another_ if to handle the next case:
@@ -115,11 +117,10 @@ Of course, the letter might not be an `'A'`, so we have to write _another_ if to
 ```
 letterScoreUsingIf letter = if (letter == 'A') then 2
                               else if (letter == 'E') then 1
-                                else
+                                else 0
 ```
 
 And we do this several more times:
-
 
 ```
 letterScoreUsingIf letter = if (letter == 'A') then 2
@@ -144,7 +145,9 @@ letterScoreUsingIf 'X'
 So as you can see, if statements are pretty simple, but they have some drawbacks - in particular, if you need to nest several conditions in a row, they can be a bit hard to read.  We'll learn some alternatives to `if` after your first homework.
 
 ## Homework 1: Nucleotides, Using If
-Let's write our nucleotide example.  It sounds pretty easy, doesn't it?  The letter score example should give you a pretty good sense of how to proceed.  Don't forget to handle the case where the input character is not one of the recognized nucleotides.
+Write a program which, when given a nucleotide (such as 'A'), returns that nucleotide's complement (such as 'T').  If the letter provided is not a valid nucleotide, return 'X'.
+
+It sounds pretty easy, doesn't it?  The letter score example should give you a pretty good sense of how to proceed.  
 
 Fill in the function `nucleotideIf` in the REPL, replacing the current return value ('Z') with a program that returns the proper value.
 
@@ -152,13 +155,21 @@ One note: since this function is looking at _individual characters_, remember to
 
 ### Pattern Matching
 
-So far, every time we've written a function, we've written it one time and never re-used the name.  Furthermore, when defining the parameters to the function, we've just given it a single name (like `n` in the above example) and then adjusted our code inside the function to deal with the fact that the parameter could contain any argument.
+So far, every time we've written a function, we've written it one time and never re-used the name.  Furthermore, when defining the parameters to the function, we've just given it a single name (like `letter` in the letter score example) and then adjusted our code inside the function to deal with the fact that the parameter could contain any argument.
 
 Haskell lets us do something really powerful, though: it lets us write functions for _specific_ arguments, by effectively writing the function multiple times - with a different function body for each argument.
 
 #### Worked Example: The Vowel Game, Pattern Matching.
 
 We're going to write our letter score function again, only this time instead of using a deeply-nested `if` statements, we're going to use pattern matching.
+
+In your repl, find the function:
+
+```
+letterScorePM _ = 99999
+```
+
+That code means "Given ANY input (the `_` means "anything"), return the value 99999.  Obviously that's not good enough for our game; let's fix it.
 
 The first case we need to handle is the vowel `'A'`.  Our rules say that `'A'` is worth 2 points.
 
@@ -192,13 +203,15 @@ letterScorePM  _  = 0
 
 That's it! Try it out in the REPL.
 
+One note: **the order matters**: Haskell will check these cases from top to bottom in the order in which they were declared.  When you're matching on a literal this isn't that important, but if you were to move the `letterScorePM _` line above the `A` case, every letter would be worth 0, which would be wrong.
+
 ### Homework 2: Nucleotides, Using Pattern Matching
 
-Please write a new version of the nucleotide function you wrote for Homework 1. This time, don't use if, and instead use pattern matching to accomplish the task.
+Please write a new version of the nucleotide function you wrote for Homework 1, using the function named `nucleotidePattern`. This time, don't use if, and instead use pattern matching to accomplish the task.
 
 ### Editorial Comment
 
-Pattern matching is probably _the single most important syntax you'll learn in Haskell_.  It actually does more than we are telling you here.  It's not just a fancy conditional, but also is the **primary way** that we break down complex data structures to allow us to write easier functions. Since we don't have any complex data structures yet, you're not seeing this side of it.  But if you remember one thing from this chapter, make it pattern matching.  Pattern matching should always be the first technique you reach for when solving problems in Haskell. It won't always apply, but when it does it will usually be the best way.
+Pattern matching is probably **the single most important syntax you'll learn in Haskell**.  It actually does more than we are telling you here.  It's not just a fancy conditional, but also is the **primary way** that we break down complex data structures to allow us to write easier functions. Since we don't have any complex data structures yet, you're not seeing this side of it.  But if you remember one thing from this chapter, make it pattern matching.  Pattern matching should always be the first technique you reach for when solving problems in Haskell. It won't always apply, but when it does it will usually be the best way.
 
 ## Lists
 
@@ -208,7 +221,7 @@ You won't be surprised to hear me say "There's more than one way to do it", but 
 
 A list in casual conversation has a simple definition: a collection of items, in a specific order.  The formal definition is a little more involved, and in English is this:
 
-> A _list of some type t_ is either:  [] ("the empty list") **or** an object of type t put onto the front of another list of some type t.
+> A _list of some type t_ is either:  [] ("the empty list") **or** an object of type t put **onto the front of another list** of some type t.
 
 The operator we use to build a list is `:`.  This is pronounced `cons`, which is short for "constructor", for historical reasons.  When the above defintiion says "put onto the front of another list" that means we take the item we want to add to the front of the list, and use `:` to do it.
 
@@ -235,7 +248,7 @@ And we can extend this logic to all the numbers we want:
 => [1, 2, 3]
 ```
 
-In fact, we can simply type `[1, 2, 3]` if we want that list, and it will work fine - Haskell knows what we mean.  But _under the hood_, keep in mind that that list represents `1 : 2 : 3: []`, because next week it's going to be _very important_ that we remember that the empty list is there.
+In fact, we can simply type `[1, 2, 3]` if we want that list, and it will work fine - Haskell knows what we mean.  But _under the hood_, keep in mind that that list represents `1 : 2 : 3 : []`, because next week it's going to be _very important_ that we remember that the empty list is there.
 
 ### Homework 3: Writing a List
 
@@ -244,5 +257,7 @@ In your REPL are two names, `myLongDNA` and `myLongComp`, both currently set to 
 In `myLongDNA`, write a list of 6 valid nucleotides - they can be whatever you want, as long as they are one of the four nucleotides `A`, `C`, `T`, and `G`.  Write this list in the `[1, 2, 3]` list syntax we just discussed.
 
 In `myLongComp`, write a list of 6 nucleotides that complement the 6 nucleotides you chose for `myLongDNA`.  Please write this list in the `1 : 2 : 3 : []` format.
+
+Bonus question: Write a one-line function that **proves** that the list `[1, 2, 3]` is the exact same thing as the list `1 : 2 : 3 : []`. Name it whatever you want.
 
 As always, if you have any questions, feel free to post them on Google Classroom!
