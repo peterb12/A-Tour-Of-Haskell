@@ -52,11 +52,13 @@ More generally, this aspect of Haskell is something that is both good and bad.  
 
 ### Our Example: DNA Nucleotides
 
-When you taken a biology course that talks about DNA, you may learn about nucleotides; these are the molecules that make up our genes.  The molecules in those nucleotides fit together in a very specific way so that when a DNA (or RNA) molecule is created, it always fits together. We can say that the nucleotide that "plugs into" another nucleotide is its _complement_.
+When you taken a biology course that talks about DNA, you may learn about nucleotides; these are the molecules that make up our genes.  The molecules in those nucleotides fit together in a very specific way so that when a DNA (or RNA) molecule is created, it always fits together. We can say that the nucleotide that "plugs into" another nucleotide is its _complement_.  A sequence of paired nucleotides together make up a strand of DNA.
 
 Here's a diagram:
 
 ![Nucleotides](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fs3.amazonaws.com%2Fai2-vision-textbook-dataset%2Fdataset_releases%2Frc2%2Ftrain%2Fquestion_images%2Fdna_8054.png)
+
+(Image credit: Allen Institute of AI)
 
 There are four types of Nucleotides: adenine, guanine, thymine, and cystine.  For convenience, let's call these `'A'`, `'G'`, `'T'`, and `'C'`. (There's actually a `'U'` for RNA as well, but let's ignore that one for now).
 
