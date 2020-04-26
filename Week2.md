@@ -1,4 +1,4 @@
-## Week 2
+# Week 2 - Conditionals
 
 Welcome to week 2!  This week is going to start easy, but will finish up introducing some simple techniques that will help us solve more complicated problems.
 
@@ -52,7 +52,11 @@ More generally, this aspect of Haskell is something that is both good and bad.  
 
 ### Our Example: DNA Nucleotides
 
-If you've taken a biology course that talks about DNA, you may know about nucleotides; these are the molecules that make up our genes.  The molecules fit together in a very specific way so that when a DNA (or RNA) molecule is created, it always fits together. We can say that the nucleotide that "plugs into" another nucleotide is its _complement_.
+When you taken a biology course that talks about DNA, you may learn about nucleotides; these are the molecules that make up our genes.  The molecules in those nucleotides fit together in a very specific way so that when a DNA (or RNA) molecule is created, it always fits together. We can say that the nucleotide that "plugs into" another nucleotide is its _complement_.
+
+Here's a diagram:
+
+![Nucleotides](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fs3.amazonaws.com%2Fai2-vision-textbook-dataset%2Fdataset_releases%2Frc2%2Ftrain%2Fquestion_images%2Fdna_8054.png)
 
 There are four types of Nucleotides: adenine, guanine, thymine, and cystine.  For convenience, let's call these `'A'`, `'G'`, `'T'`, and `'C'`. (There's actually a `'U'` for RNA as well, but let's ignore that one for now).
 
@@ -67,7 +71,7 @@ You may have noticed that we are now using a new datatype: `Char`, which represe
 
 In the following sections, we're going to write a function that takes a single character representing a nucleotide, and returns a single character representing the complement of that nucleotide.  For right now, if we come across a character we don't recognize, we will return `'X'`. (This is actually not a great way to do this - one of the most powerful tools Haskell gives us is the ability to define types in a way that prevents us having to write lots of error-handling code, but we will get to that in a future week).
 
-### Conditionals: if-then-else
+## Conditionals: if-then-else
 
 Let's start with something you might be familiar with from other programming languages: the idea of `if`.
 
@@ -96,7 +100,7 @@ checkName myName = if (myName == "Lydia")
 
 (This program is in your REPL; try it out.)
 
-#### Worked Example: The Vowel Game, with `if…then…else`
+### Worked Example: The Vowel Game, with `if…then…else`
 
 Let's say we're playing a word game where the goal is to play words with lots of vowels.  In this game, the vowels A, E, I, O, and U are worth 2, 1, 3, 4, and 5 points respectively; all other letters are worth 0.  As part of writing a computer version of this game, we want a function that will tell us the score for a particular letter.
 
@@ -131,7 +135,7 @@ letterScoreUsingIf letter = if (letter == 'A') then 2
                                       else 0
 ```
 
-Note our final `else` clause, which will handle any letter that isn't a vowel.
+(That's a letter 'O' up there, not a number zero!)  Note our final `else` clause, which will handle any letter that isn't a vowel.
 
 Now we can try it in the REPL:
 
@@ -144,22 +148,13 @@ letterScoreUsingIf 'X'
 
 So as you can see, if statements are pretty simple, but they have some drawbacks - in particular, if you need to nest several conditions in a row, they can be a bit hard to read.  We'll learn some alternatives to `if` after your first homework.
 
-## Homework 1: Nucleotides, Using If
-Write a program which, when given a nucleotide (such as 'A'), returns that nucleotide's complement (such as 'T').  If the letter provided is not a valid nucleotide, return 'X'.
-
-It sounds pretty easy, doesn't it?  The letter score example should give you a pretty good sense of how to proceed.  
-
-Fill in the function `nucleotideIf` in the REPL, replacing the current return value ('Z') with a program that returns the proper value.
-
-One note: since this function is looking at _individual characters_, remember to enclose them in single-quotes, like this: `'A'`, NOT in double-quotes.
-
-### Pattern Matching
+## Pattern Matching
 
 So far, every time we've written a function, we've written it one time and never re-used the name.  Furthermore, when defining the parameters to the function, we've just given it a single name (like `letter` in the letter score example) and then adjusted our code inside the function to deal with the fact that the parameter could contain any argument.
 
 Haskell lets us do something really powerful, though: it lets us write functions for _specific_ arguments, by effectively writing the function multiple times - with a different function body for each argument.
 
-#### Worked Example: The Vowel Game, Pattern Matching.
+### Worked Example: The Vowel Game, Pattern Matching.
 
 We're going to write our letter score function again, only this time instead of using a deeply-nested `if` statements, we're going to use pattern matching.
 
@@ -205,10 +200,6 @@ That's it! Try it out in the REPL.
 
 One note: **the order matters**: Haskell will check these cases from top to bottom in the order in which they were declared.  When you're matching on a literal this isn't that important, but if you were to move the `letterScorePM _` line above the `A` case, every letter would be worth 0, which would be wrong.
 
-### Homework 2: Nucleotides, Using Pattern Matching
-
-Please write a new version of the nucleotide function you wrote for Homework 1, using the function named `nucleotidePattern`. This time, don't use if, and instead use pattern matching to accomplish the task.
-
 ### Editorial Comment
 
 Pattern matching is probably **the single most important syntax you'll learn in Haskell**.  It actually does more than we are telling you here.  It's not just a fancy conditional, but also is the **primary way** that we break down complex data structures to allow us to write easier functions. Since we don't have any complex data structures yet, you're not seeing this side of it.  But if you remember one thing from this chapter, make it pattern matching.  Pattern matching should always be the first technique you reach for when solving problems in Haskell. It won't always apply, but when it does it will usually be the best way.
@@ -225,7 +216,7 @@ A list in casual conversation has a simple definition: a collection of items, in
 
 One implication of this definition is that a list can only hold objects of one type.  `[1, 2, 3, 4]` is a list.  `['A', 'B', 'C', 'D']` is a list.  but `[1, 'A', 2, 'B']` is not a list, because it contains multiple types, and can't be built.  (There *are* ways to build lists that contain all of those items, but you have to use another data structure, the tuple, that we haven't introduced yet)
 
-The operator we use to build a list is `:`.  This is pronounced `cons`, which is short for "constructor", for historical reasons.  When the above defintiion says "put onto the front of another list" that means we take the item we want to add to the front of the list, and use `:` to do it.  
+The operator we use to build a list is `:`.  This is pronounced `cons`, which is short for "constructor", for historical reasons.  When the above definition says "put onto the front of another list" that means we take the item we want to add to the front of the list, and use `:` to do it.  
 
 Let's say we're working with lists of Ints, and we want to end up with a list of the numbers 1, 2, and 3, in that order.  There are very simple ways to do this, but let's do it the **hard** way first.
 
@@ -251,6 +242,23 @@ And we can extend this logic to all the numbers we want:
 ```
 
 In fact, we can simply type `[1, 2, 3]` if we want that list, and it will work fine - Haskell knows what we mean.  But _under the hood_, keep in mind that that list represents `1 : 2 : 3 : []`, because next week it's going to be _very important_ that we remember that the empty list is there.
+
+## Homework Assignments
+
+Hi!  If you jumped straight down here to the homework without reading the course materials, **please go back to the top and read the course materials first**, and make sure you **try all the course materials in the REPL**.  You'll have a much easier time with this homework if you do that first.
+
+### Homework 1: Nucleotides, Using If
+Write a program which, when given a nucleotide (such as 'A'), returns that nucleotide's complement (such as 'T').  If the letter provided is not a valid nucleotide, return 'X'.
+
+It sounds pretty easy, doesn't it?  The letter score example should give you a pretty good sense of how to proceed.  
+
+Fill in the function `nucleotideIf` in the REPL, replacing the current return value ('Z') with a program that returns the proper value.
+
+One note: since this function is looking at _individual characters_, remember to enclose them in single-quotes, like this: `'A'`, NOT in double-quotes.
+
+### Homework 2: Nucleotides, Using Pattern Matching
+
+Please write a new version of the nucleotide function you wrote for Homework 1, using the function named `nucleotidePattern`. This time, don't use if, and instead use pattern matching to accomplish the task.
 
 ### Homework 3: Writing a List
 
