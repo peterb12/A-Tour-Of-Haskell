@@ -59,7 +59,7 @@ is the type signature. It says that this function takes a String as input, and r
 
 Type signatures do at least two things: they help the compiler give slightly better error messages, and they help you as the programmer remember what type a function needs to take or return.
 
-This is important **don't edit any of the type signatures in the REPL**.  And if you write helper functions while doing the homework, you do **not** have to write type signatures. They are in this REPL just so you can get used to seeing them.  **But don't edit them.**
+This is important: for this week, **don't change any of the type signatures in the REPL**.  And if you write helper functions while doing the homework, you do **not** have to write type signatures. They are in this REPL just so you can get used to seeing them.  **But don't change them.**
 
 
 ## Making Decisions
