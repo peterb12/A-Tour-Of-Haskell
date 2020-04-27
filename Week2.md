@@ -40,6 +40,28 @@ the last 3 lines of the error message are effectively meaningless - the earlier 
 
 It's generally a good idea to deal with your errors from the top down - fix the first thing you find, then click 'Run' again and go on to the next one.
 
+## And a word about type signatures.
+
+Starting this week, the functions you see in your REPL will come wtih _type signatures_.  For example, in this function:
+
+```
+checkName :: String -> String
+checkName myName = if (myName == "Lydia")
+            then "Hi, Lydia!"
+            else "Sorry, I don't talk to strangers."
+```
+
+The line that looks like this:
+```
+checkName :: String -> String
+```
+is the type signature. It says that this function takes a String as input, and returns a String as output.  You can pronounce "::" as "Has the type of", so "checkName _has the type of_ String to String"
+
+Type signatures do at least two things: they help the compiler give slightly better error messages, and they help you as the programmer remember what type a function needs to take or return.
+
+This is important **don't edit any of the type signatures in the REPL**.  And if you write helper functions while doing the homework, you do **not** have to write type signatures. They are in this REPL just so you can get used to seeing them.  **But don't edit them.**
+
+
 ## Making Decisions
 
 Last week all of the expressions we wrote were very straightforward. Given an input value, the computer could find the answer by just repeatedly simplifying the expression.
