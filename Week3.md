@@ -52,10 +52,11 @@ def count_up_to_ten():
 
 There's a joke among programmers that goes like this:
 
-> The **two** hardest problems in Computer Science are:
-> -Cache invalidation
-> -Naming things
-> -Off-by-one errors.
+_The **two** hardest problems in Computer Science are:
+
+1. Cache invalidation
+2. Naming things
+3. Off-by-one errors._
 
 And in fact, when I wrote those programs up above, my original plan was to count from 1 to 10!  But I had an off-by-one error, and so I changed the rules of the game to count from 0 to 9, instead. So we have a live example of how iteration "by hand", even with a statement to help us, is hard to do.
 
