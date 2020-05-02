@@ -130,24 +130,212 @@ Now we can have as many monkeys as we want.  That's a lot of monkeys.
 
 #### Worked Example: Factorial
 
+Let's take a look at an example of recursion in Haskell.  We're going to use a really simple example: the factorial operation.
+
+A factorial is a mathematical operation like addition or subtraction, usually using the operator `!`.  In math, `4!` means that we calculate the value `4 * 3 * 2 * 1`.  They're used a lot in probability and statistics.  For example, the formula (52! / 5! * 47!) tells us the number of possible 5-card poker hands in a 52-card deck. (The answer is over 2 and a half million!, and that's WITH the division, which demonstrates that factorials get really large really fast.
+
+`4!` is pretty easy to calculate even in your head - 4 times 3 is 12, 12 times 2 is 24, and 24 times 1 is 24 - so `4! == 24`.  There's also a special case I should mention: `0! == 1`.
+
+More formally, a reasonable mathematical definition of factorial is as follows:  _For any number n > 0, n! is equal to `n * (n - 1)!`. For n = 0, n! is equal to 1._  Another way to phrase it would be:  _For any positive number, n! is equal to `1 * 2 * 3 ... * (n - 1) * n`_.  Factorial is undefined for negative numbers, so we don't have to worry about them.  (You could argue that `0!` shouldn't even be a thing, but it makes some types of math easier if we define it.)
+
+In your repl, you should see the placeholder function we're going to use:
+
+```
+factorial :: Int -> Int
+
+factorial = 0
+```
+
+Let's replace that wrong answer, 0, with an actual definition.
+
+Since we've been told we have to write a recursive definition, we **know** we are going to need a base case, and a recursive case.  Something I like to do when I can is write out all the cases at once, even before I've written any code.
+
+So using 0 as a base case is usually a good idea, so let's start there.
+
+```
+factorial 0 = _something
+factorial n = _something_that_calls_factorial
+```
+
+If you click "Run" now, you'll get a bunch of scary looking errors but all they're telling us is that we left holes in the program named `_something` and `_something_that_calls_factorial`, and that Haskell wants them both to be Ints.
+
+We know that the factorial of 0 is always 1, so let's replace that first `_something` with that.
+
+```
+factorial 0 = 1
+factorial n = _something_that_calls_factorial
+```
+
+What if we have a positive number? Let's think about the case where we want `1!`
+
+`1!` is the same as `1 * 0!` which is the same as `1 * 1`.  So the trick we're going to use here is to subtract 1 from n each time through the factorial function, just like in the math definition:
+
+```
+factorial 0 = 1
+factorial n = n * factorial (n - 1)
+```
+
+And that's it -- we're done!  Try it out for yourself.
+
+```
+   factorial 5
+=> 120
+   factorial 10
+=> 3628800
+   factorial 20
+=> 2432902008176640000
+```
+
+##### Optional Topic: Int vs Integer
+
+This is an advanced topic that you probably will never need to know in your lifetime about how numbers work inside the computer. You can skip this section if you're not interested; you don't need it for the homeworks.  
+
+You may remember way back in the first week I mentioned that there was an `Int` type and also an `Integer` type, and that the differences didn't matter to us.  Usually they don't.  But `factorial` offers a chance to see how they're different.
+
+If you type `factorial 49`, you'll get a large number.  If you type `factorial 50`, you'll get...a really large _negative_ number.  What the heck happened?
+
+The answer is that for efficiency, `Int` is a 64 bit signed number, stored in what's called "2's complement" form.  That means that the number takes up 64 bits of space inside the computer, with the first bit being used to indicate whether it's positive or negative.  This means the largest number an `Int` can represent is 2 to the 63rd power, or, if I'm counting correctly, roughly 9.2 quintillion.  In practice, this is usually more than enough numbers for anything we want to do.
+
+However, if we want bigger numbers, we have them: `Integer` is a data type (I haven't explained what that is yet, but roll with it) that has an arbitrary size. In fact, if you **ignore what I told you** at the start of this lesson and change both instances of `Int` to `Integer` in the type signature of `factorial`, you can now get correct answers for `factorial 50` and larger numbers.  If you pick a number that's too large, your REPL will hang.  Congratulations! Breaking things is a big part of learning. If this happened to you, hit reload to get it back.
+
+Why don't we just use `Integer` all the time instead of `Int`? Because (1) we hardly ever need numbers that big and (2) we pay a cost for it, because computing with `Integer` is much slower than computing with `Int`.
+
+#### Homework 1: The Fibonacci Sequence
+
+The Fibonacci sequence, which appears in weird places in real life, such as the shells of snails, is defined as follows:
+
+The first fibonacci number is 0.
+The second fibonacci number is 1.
+The third and subsequent fibonacci numbers are the sum of the previous two fibonacci numbers.
+
+**Your assignment is:  Complete the function 'fibonacci' that, given a number n, tells you the nth fibonacci number.**
+
+Working through the first few answers by hand (but not in code)
+
+`fibonacci 3` is 1, because `0 + 1 = 1`.
+`fibonacci 4` is 2, because `1 + 1 = 2`.
+`fibonacci 5` is 3, because `1 + 2 = 3`.
+`fibonacci 6` is 5, because `2 + 3 = 5`.
+`fibonacci 7` is 8, because `3 + 5 = 8`.
+`fibonacci 8` is 13, because `8 + 5 = 13`.
+
+Like factorials, fibonacci numbers get bigger surprisingly fast.  For your testing convenience, the first 29 fibonacci numbers are `0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765, 10946, 17711, 28657, 46368, 75025, 121393, 196418, 317811`.
+
 ### Recursion and Lists
+
+From last week, remember the definition of a list:
+
+**A list of type t is either an empty list `[]`, or an item of type t followed by a list of type t.**
+
+The interesting thing about this is that lists are _defined recursively_.  It's not a coincidence that recursion is a great way to work with lists.
 
 #### Worked Example: Length of a List
 
+Let's write a function that, given a list, tells you how long it is.  (Haskell ships with this function built in, but it's still useful for us to build it ourselves.)
+
+```
+listLength :: [a] -> Int
+
+listLength myList = 0
+```
+
+The type annotation [a] means "listLen takes as input a list of anything, and returns an integer".  Since we're not doing anything with elements of the list except counting them, we don't care what the list contains.
+
+So let's repeat the _most important thing about recursion_: A recursive definition has a **base case** and a **recursive case**, right?  What's the base case for a list?  We can't use `0`, since a list isn't a number.  So what is it?
+
+The base case for recursion involving lists is almost always a list with nothing in it, called "the empty list" or sometimes "nil" or "`[]`".  So let's replace that first definition with:
+
+```
+listLength [] = _something
+```
+
+How long is a list with nothing in it?  Clearly, it's 0.
+
+```
+listLength [] = 0
+```
+
+Next, we have to define our recursive case - this is the case that's going to handle every other part of every other list besides the empty list.
+
+To do this, I have to introduce a little more syntax to you: **pattern-matching on lists**.
+
+I told you in the last chapter that pattern matching was more powerful than what we were using it for.  Now I'm going to prove it.  Pattern matching doesn't just act like a souped-up conditional, it also allows us to **break a list up into smaller parts** (and not just lists, either.)  We call this "destructuring" the data.
+
+The specific bit of syntax we need is the `:` operator, which you'll remember is what we use to build a list in the first place.  Put simply, if you have a list like ['A', 'B', 'C', 'D'] and you pattern-match it with something like (first:rest), then `first` will be bound to the first element of the list, and `rest` will bind to the rest of the list.  The names of our bindings aren't important -- try this in the REPL:
+
+```
+>  testList
+=> ["Adam","Andrew","Arnav","David","Hanna","Henry","Isabella","Nikolas","Rex","Sonny","Taylor","Aaron","Dmitri"]
+>  (tik : tok) = testList
+>  tik
+=> "Adam"
+>  tok
+=> ["Andrew","Arnav","David","Hanna","Henry","Isabella","Nikolas","Rex","Sonny","Taylor","Aaron","Dmitri"]
+```
+
+Commonly people will use (x : xs) for destructuring lists, but you can and should use whatever names help you remember how it works.
+
+So back to our list length: let's decompose our list:
+
+```
+listLength [] = 0
+listLength (this : others) = _something_recursive
+```
+
+So now "this" will be the first item on the list, and "others" will be all the other items on the list.  Now we have to figure out how to recurse.  Well, since we are (metaphorically) holding `this` in our hands, we know that that's one item, right?  So we can count it...
+
+```
+listLength [] = 0
+listLength (this : others) = 1 + _something_recursive
+```
+
+and then add it to the length of the rest of the list (that is, the bits of the list that don't include `this`) -- which we can figure out by using the very function we're writing! 
+
+```
+listLength [] = 0
+listLength (this : others) = 1 + listLength others
+```
+
+That's our function, and we can test it out:
+```
+> listLength testList
+=> 13
+```
+
+We're almost done.  As a stylistic thing, note that although we named `this`, we never actually used it.  To make our code easier to read, we can tell the reader that the name (in this case) isn't important by just calling it `_`.
+
+```
+listLength [] = 0
+listLength (_ : others) = 1 + listLength others
+```
+
+That's it!
+
+I promised you this week would get a little harder, so now you get three homeworks in a row, with no hints.  If you get stuck, ask on Google Classroom for help - but try to think your way through it!
+
+OK, ok, ok, you get ONE hint: the correct answers to each of these homeworks should be very short: no more than 2 or 3 lines, not counting type signatures.  You should not have to change any type signatures to finish these exercises.
+
 #### Homework 2: Sum a list of integers
+
+Complete the function `mySum` by writing a recursive function that takes as input a list of Ints, and returns an Int that is the total of all those integers.
 
 #### Homework 3: Product of a list of integers
 
+Complete the function `myProduct` by writing a recursive function that takes as input a list of Ints, and returns an Int that is the product (that is, the multiplication) of all those integers.
+
 #### Homework 4: Convert a string of nucleotides
+BEFORE YOU BEGIN: Go back to last week's lesson, copy your answer from Homework 2 Week 2 (your `nucleotidePattern` function), and paste it into the spot in your homework labeled "PASTE HERE".
 
-### Higher-order functions
+Then, complete the function `convertDNA` by writing a recursive function that takes a string of letters representing nucleotides and converts them into their complement (so, if the input string was `TTGG`, you'd get back `AACC`).  You should NOT need to touch your nucleotidePattern program other than pasting it into your class program.
 
-#### Map
+#### Homework 5: Thinking about things
 
-#### Filter
+Pick ONE of these two exercises (A or B) and do it.  You don't have to do both.
 
-#### A mention of "reduce" / foldr.
+(A)
+Once all your tests are passing, look at your answers for Homework 3, 4, and 5.  Write a post on Google Classroom describing (in your own words) what parts of them are similar to each other. Are there aspects of them that seem different? Somewhat similar? Somewhat identical?  What are they?  Could you write one program that solved all three problems (or solved the hard parts of those problems? Why or why not? 
 
+(B) Think of the list `[5, 6, 2]`.  Imaging you applied the function `myProduct` to that list:  `myProduct [5, 6, 2]`.  Write a post on Google Classroom describing the exact steps the program went through. Specifically, identify each time the function `myProduct` is called - what argument was passed into it each time, and what did it return?   Since this will get confusing very fast, identify each function call with a unique emoji when talking about it.
 
 
 
