@@ -84,7 +84,7 @@ So ideally we would find some way to run "the same" code over and over again, as
 
 Recursion is the process of a function calling itself to solve a similar version of the problem.
 
-I want to start by doing recursion the _wrong_ way.  Just like in the loop case, you _can_ write a function that calls itself in a way that won't help you.  In your repl.it document, you should see this function:
+I want to start by doing recursion the _wrong_ way.  Just like in the loop case, you _can_ write a function that calls itself in a way that won't help you.  In your class program on repl.it, you should see this function:
 
 ```
 infiniteMonkeys = ["monkeys"] ++  infiniteMonkeys
@@ -101,7 +101,7 @@ One of the coolest things about Haskell is that it actually allows us to deal wi
 
 and it works just fine.  However, if we just type `infiniteMonkeys` in the REPL...well, go ahead and try it.  You'll probably have to reload the page to get it unlocked though.
 
-What we see here is that `infiniteMonkeys` is recursive (because it calls itself), it's not really _usefully_ recursive (because it might never stop running).  Useful recursive functions do their work and eventually finish that work.
+What we see here is that `infiniteMonkeys` is recursive (because it calls itself), it's not really _usefully_ recursive (because it might never stop running.  Useful recursive functions do their work and eventually finish that work.
 
 Let's write a function that will terminate. I'm going to use a conditional to do this to make clear what's happening, but after that we will use pattern matching for almost all of our recursive functions.
 
@@ -214,10 +214,15 @@ The third and subsequent fibonacci numbers are the sum of the previous two fibon
 Working through the first few answers by hand (but not in code)
 
 `fibonacci 3` is 1, because `0 + 1 = 1`.
+
 `fibonacci 4` is 2, because `1 + 1 = 2`.
+
 `fibonacci 5` is 3, because `1 + 2 = 3`.
+
 `fibonacci 6` is 5, because `2 + 3 = 5`.
+
 `fibonacci 7` is 8, because `3 + 5 = 8`.
+
 `fibonacci 8` is 13, because `8 + 5 = 13`.
 
 Like factorials, fibonacci numbers get bigger surprisingly fast.  For your testing convenience, the first 29 fibonacci numbers are `0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765, 10946, 17711, 28657, 46368, 75025, 121393, 196418, 317811`.
