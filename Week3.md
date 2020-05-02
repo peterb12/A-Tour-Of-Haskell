@@ -2,6 +2,13 @@
 
 OK, team, we've gone easy on you so far, but this week we're going to challenge you.  Up until now, all the code you've written has been more or less a single expression.  Sometimes, as in the case of your nucleotide program if, that expression might have been complicated, but it was always just in and out.  This week, we're going to talk about how to do things multiple times. In most programming languages, you do this by _iteration_. In Haskell, and in most functional languages, you'll do this by _recursion_.
 
+Before we begin, THE THREE RULES:
+
+1. There are no grades here. Try to think through the problems yourself, and ask for help on Google Classroom. You can look up answers to _all_ of these questions online, but the only person you're cheating by doing that is yourself.  However, **discussing the _concepts_, as opposed to the answers, with your classmates is _not cheating_, and I encourage you to do that as much as you want**.  Talking about the concepts is helpful to everyone!
+2. Whenever I say "class program", I mean your copy of the Week 3 REPL, linked here.
+3. I have provided type signatures for all of the functions in the class program. Changing the type signatures will almost certainly cause your program to break. If you want to experiment with changing them to try to figure out what they mean, go for it, but be warned that you might have to fork a new copy of the REPL if you can't fix it.  **If later in this document, say in the "Optional Topic" section, I tell you to change the type signature, it's probably because I'm an evil Disney villain and am trying to trap you in a neverending dimension of transinfinite pain!  Don't trust me!**
+
+
 ## A Short History of Iteration
 
 In the beginning, a computer was a person (often, in the 20th century up until sometime after World War II, a woman) who did math for engineers, with pencil and paper.  When you wanted the computer to do some calculation a number of times, you'd tell her what you wanted in words - "Do step B 7 times, add up the results, and then go on to step C."
@@ -267,7 +274,7 @@ To do this, I have to introduce a little more syntax to you: **pattern-matching 
 
 I told you in the last chapter that pattern matching was more powerful than what we were using it for.  Now I'm going to prove it.  Pattern matching doesn't just act like a souped-up conditional, it also allows us to **break a list up into smaller parts** (and not just lists, either.)  We call this "destructuring" the data.
 
-The specific bit of syntax we need is the `:` operator, which you'll remember is what we use to build a list in the first place.  Put simply, if you have a list like ['A', 'B', 'C', 'D'] and you pattern-match it with something like (first:rest), then `first` will be bound to the first element of the list, and `rest` will bind to the rest of the list.  The names of our bindings aren't important -- try this in the REPL:
+The specific bit of syntax we need is the `:` operator, which you'll remember is what we use to build a list in the first place.  Put simply, if you have a list like ['A', 'B', 'C', 'D'] and you pattern-match it with something like `(first : rest)`, then `first` will be bound to the first element of the list, and `rest` will bind to the rest of the list.  The names of our bindings aren't important -- try this in the REPL:
 
 ```
 >  testList
@@ -279,7 +286,7 @@ The specific bit of syntax we need is the `:` operator, which you'll remember is
 => ["Andrew","Arnav","David","Hanna","Henry","Isabella","Nikolas","Rex","Sonny","Taylor","Aaron","Dmitri"]
 ```
 
-Commonly people will use (x : xs) for destructuring lists, but you can and should use whatever names help you remember how it works.
+Commonly people will use the names `(x : xs)` for destructuring lists, but you can and should use whatever names help you remember how it works.
 
 So back to our list length: let's decompose our list:
 
