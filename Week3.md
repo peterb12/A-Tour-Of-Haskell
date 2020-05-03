@@ -1,23 +1,23 @@
 # Week 3 
 
-OK, team, we've gone easy on you so far, but this week we're going to challenge you.  Up until now, all the code you've written has been more or less a single expression.  Sometimes, as in the case of your nucleotide program if, that expression might have been complicated, but it was always just in and out.  This week, we're going to talk about how to do things multiple times. In most programming languages, you do this by _iteration_. In Haskell, and in most functional languages, you'll do this by _recursion_.
+OK, team, we've gone easy on you so far, but this week we're going to challenge you.  Up until now, all the code you've written has been more or less a single expression.  Sometimes, as in the case of your nucleotide program if, that expression might have been complicated, but it was always just a simple evaluation.  This week, we're going to talk about how to do things multiple times. In most programming languages, you do this by _iteration_. In Haskell, and in most functional languages, you'll do this by _recursion_.
 
 Before we begin, THE THREE RULES:
 
 1. There are no grades here. Try to think through the problems yourself, and ask for help on Google Classroom. You can look up answers to _all_ of these questions online, but the only person you're cheating by doing that is yourself.  However, **discussing the _concepts_, as opposed to the answers, with your classmates is _not cheating_, and I encourage you to do that as much as you want**.  Talking about the concepts is helpful to everyone!
 2. Whenever I say "class program", I mean your copy of the Week 3 REPL, linked here.
-3. I have provided type signatures for all of the functions in the class program. Changing the type signatures will almost certainly cause your program to break. If you want to experiment with changing them to try to figure out what they mean, go for it, but be warned that you might have to fork a new copy of the REPL if you can't fix it.  **If later in this document, say in the "Optional Topic" section, I tell you to change the type signature, it's probably because I'm a time-traveller from the future and am trying to trap you in a neverending dimension of transinfinite pain!  Don't trust future me! RUN! SAVE YOURSELVES**
+3. I have provided type signatures for all of the functions in the class program. Changing the type signatures will almost certainly cause your program to break. If you want to experiment with changing them to try to figure out what they mean, go for it, but be warned that you might have to fork a new copy of the REPL if you can't fix it.  **If later in this document, say in the "Optional Topic" section, I tell you to change the type signature, it's probably because I'm a time-traveller from the future and am trying to trap you in a neverending dimension of transinfinite frustration!  Don't trust future me! RUN! SAVE YOURSELVES**
 
 
 ## A Short History of Iteration
 
-In the beginning, a computer was a person (often, in the 20th century up until sometime after World War II, a woman) who did math for engineers, with pencil and paper.  When you wanted the computer to do some calculation a number of times, you'd tell her what you wanted in words - "Do step B 7 times, add up the results, and then go on to step C."
+In the beginning, a computer was a person (most times, in the 20th century up until sometime after World War II, a woman) who did math for engineers, with pencil and paper.  When you wanted a computer to do some calculation a number of times, you'd tell her what you wanted in words - "Do step B 7 times, add up the results, and then go on to step C."
 
 Human computers at NASA, 1955: ![Human computers at NASA](https://www.history.com/.image/c_limit%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_686/MTU3ODc4NjA0MDUwMDgxNTAz/image-placeholder-title.jpg)
 
 ### Go to this address in memory
 
-Early computers were often programmed in very low-level instructions called machine language, with "assembly language" being a slightly-more human readable version of ths.  Normally the computer would execute one instruction, then go to the memory location 1 position higher and execute the next instruction.  If you wanted to iterate some task, what you'd do is issue a conditional branch or jump instruction whose target was some other memory location.
+Early electronic computers were often programmed in very low-level instructions called machine language, with "assembly language" being a slightly-more human readable version of ths.  Normally the computer would execute one instruction, then go to the memory location 1 position higher and execute the next instruction.  If you wanted to iterate some task, what you'd do is issue a conditional branch or jump instruction whose target was some other memory location.
 
 Here's a very simple example with a made-up assembly language where each instruction takes up 4 bytes (don't type this into your REPL - it won't work!)
 
@@ -79,9 +79,9 @@ for item in myList:
 
 ```
 
-If you run that code in a Python REPL, what you'll see is that it will run forever.  In this case, we did that on purpose, but it's very easy to make a mistake inside a loop that causes it to run forever.
+If you run that code in a Python REPL, what you'll see is that it will run forever because every time it loops, you make the list it has to iterate through even longer.  In this case, we did that on purpose, but it's very easy to make a mistake inside a loop that causes it to run forever.
 
-We call what we did inside that loop, where we added new values to `myList` while we were iterating on it `mutation`.  "Mutate" in computer science just means "change", and to change things isn't necessarily bad - usually it's very useful! - but it can be a source of errors.
+We call what we did inside that loop, where we added new values to `myList` while we were iterating on it `mutation`.  "Mutate" in computer science just means "change". When you can mutate things in a program, we call it _mutability_. Mutability isn't necessarily bad - usually it's very useful! - but it can be a source of errors. 
 
 Here's something about Haskell that's interesting: Within the space of a given function, _you can never mutate a variable_.  If in a certain part of a Haskell program, I say `x = 123`, then I cannot later say `x = x + 1`.  `x`, in that part of the program, will _always_  be 123.  (There are ways to reuse the same name in different contexts, which we will see today, but this idea of _immutability_ is one that will take some getting used to.)  This fact that variables in Haskell don't vary, is why I prefer to call them "names" or "bindings".
 
@@ -106,7 +106,7 @@ One of the coolest things about Haskell is that it actually allows us to deal wi
 => ["monkeys","monkeys","monkeys","monkeys","monkeys","monkeys","monkeys","monkeys","monkeys","monkeys"]
 ```
 
-and it works just fine.  However, if we just type `infiniteMonkeys` in the REPL...well, go ahead and try it.  You'll probably have to reload the page to get it unlocked though.
+and it works just fine.  However, if we just type `infiniteMonkeys` in the REPL...well, go ahead and try it.  You'll probably have to reload the page to get it unlocked though, since the program will be overloaded with infinite "monkeys".
 
 What we see here is that `infiniteMonkeys` is recursive (because it calls itself), it's not really _usefully_ recursive (because it might never stop running.  Useful recursive functions do their work and eventually finish that work.
 
@@ -121,6 +121,8 @@ someMonkeys amount = if amount == 0
 ```
 
 So, if "amount" is 0, then we just return the empty list - we do NOT keep recursing.  This is called the "base case", and all well-written recursive code has a base case.  Because comparing things to 0 is so easy to remember, it's a very common pattern for recursive code to count _down_ from the number the user gave, rather than up to the number the user gave.
+
+If "amount" is NOT 0, we will add "monkey" to a list, and call someMonkeys again - this time with "amount" being one less than it was. Eventually, after we have recursed through the function some number of times, "amount" will be equal to zero and the function will go to the base case.
 
 Let's rewrite `someMonkeys` in pattern-matching form.
 
@@ -142,7 +144,7 @@ Let's take a look at an example of recursion in Haskell.  We're going to use a r
 
 A factorial is a mathematical operation like addition or subtraction, usually using the operator `!`.  In math, `4!` means that we calculate the value `4 * 3 * 2 * 1`.  They're used a lot in probability and statistics.  For example, the formula (52! / 5! * 47!) tells us the number of possible 5-card poker hands in a 52-card deck. (The answer is over 2 and a half million!, and that's WITH the division, which demonstrates that factorials get really large really fast.
 
-`4!` is pretty easy to calculate even in your head - 4 times 3 is 12, 12 times 2 is 24, and 24 times 1 is 24 - so `4! == 24`.  There's also a special case I should mention: `0! == 1`.
+`4!` is pretty easy to calculate even in your head - 4 times 3 is 12, 12 times 2 is 24, and 24 times 1 is 24 - so `4! == 24`.  There's also a special case I should mention: `0! == 1`, which is useful for base cases.
 
 More formally, a reasonable mathematical definition of factorial is as follows:  _For any number n > 0, n! is equal to `n * (n - 1)!`. For n = 0, n! is equal to 1._  Another way to phrase it would be:  _For any positive number, n! is equal to `1 * 2 * 3 ... * (n - 1) * n`_.  Factorial is undefined for negative numbers, so we don't have to worry about them.  (You could argue that `0!` shouldn't even be a thing, but it makes some types of math easier if we define it.)
 
@@ -156,7 +158,7 @@ factorial = 0
 
 Let's replace that wrong answer, 0, with an actual definition.
 
-Since we've been told we have to write a recursive definition, we **know** we are going to need a base case, and a recursive case.  Something I like to do when I can is write out all the cases at once, even before I've written any code.
+Since we've been told we have to write a recursive definition, we **know** we are going to need a base case, and a recursive case.  Something I like to do when I am able is write out all the cases at once, even before I've written any code.
 
 So using 0 as a base case is usually a good idea, so let's start there.
 
@@ -165,7 +167,7 @@ factorial 0 = _something
 factorial n = _something_that_calls_factorial
 ```
 
-If you click "Run" now, you'll get a bunch of scary looking errors but all they're telling us is that we left holes in the program named `_something` and `_something_that_calls_factorial`, and that Haskell wants them both to be Ints.
+If you click "Run" now, you'll get a bunch of scary looking errors but all they're telling us is that we left holes in the program named `_something` and `_something_that_calls_factorial`, and that Haskell wants them both to be Ints because of our type signature (which you do not want to change).
 
 We know that the factorial of 0 is always 1, so let's replace that first `_something` with that.
 
@@ -193,6 +195,12 @@ And that's it -- we're done!  Try it out for yourself.
    factorial 20
 => 2432902008176640000
 ```
+
+This might seem like incomprehensible magic to you, so let's look closer into how this function works. If I call `factorial 5`, the function is going to head to its recursive case. We have set n equal to 5, so the function will take 5 and multiply it by the same function where n is equal to 5 - 1, or 4. A diagram might look something like this:
+
+![Factorial Diagram](resources/factorial_diagram.png)
+
+On the left side, you see the recursion process that `factorial 5` would go through. On the right side, you see what it will end up being mathematically equivalent to, or what it would 'simplify' to.
 
 ##### Optional Topic: Int vs Integer
 
@@ -339,16 +347,16 @@ Complete the function `myProduct` by writing a recursive function that takes as 
 #### Homework 4: Convert a string of nucleotides
 BEFORE YOU BEGIN: Go back to last week's lesson, copy your answer from Homework 2 Week 2 (your `nucleotidePattern` function), and paste it into the spot in your homework labeled "PASTE HERE".
 
-Then, complete the function `convertDNA` by writing a recursive function that takes a string of letters representing nucleotides and converts them into their complement (so, if the input string was `TTGG`, you'd get back `AACC`).  You should NOT need to touch your nucleotidePattern program other than pasting it into your class program.
+Then, complete the function `convertDNA` by writing a recursive function that takes a list of chars representing nucleotides and converts them into their complement (so, if the input list was `['T', 'T', 'G', 'G']`, you'd get back `['A', 'A', 'C', 'C']`).  You should NOT need to touch your nucleotidePattern program other than pasting it into your class program.
 
 #### Homework 5: Thinking about things
 
 Pick ONE of these two exercises (A or B) and do it.  You don't have to do both.
 
 (A)
-Once all your tests are passing, look at your answers for Homework 3, 4, and 5.  Write a post on Google Classroom describing (in your own words) what parts of them are similar to each other. Are there aspects of them that seem different? Somewhat similar? Somewhat identical?  What are they?  Could you write one program that solved all three problems (or solved the hard parts of those problems? Why or why not? 
+Once all your tests are passing, look at your answers for Homework 2, 3, and 4.  Write a post on Google Classroom (answer to the Homework 5 question) describing (in your own words) what parts of them are similar to each other. Are there aspects of them that seem different? Somewhat similar? Somewhat identical?  What are they?  Could you write one program that solved all three problems (or solved the hard parts of those problems? Why or why not? 
 
-(B) Think of the list `[5, 6, 2]`.  Imaging you applied the function `myProduct` to that list:  `myProduct [5, 6, 2]`.  Write a post on Google Classroom describing the exact steps the program went through. Specifically, identify each time the function `myProduct` is called - what argument was passed into it each time, and what did it return?   Since this will get confusing very fast, identify each function call with a unique emoji when talking about it.
+(B) Think of the list `[5, 6, 2]`.  Imaging you applied the function `myProduct` to that list:  `myProduct [5, 6, 2]`.  Write a post on Google Classroom (answer to the Homework 5 question)describing the exact steps the program went through. Specifically, identify each time the function `myProduct` is called - what argument was passed into it each time, and what did it return?   Since this will get confusing very fast, identify each function call with a unique emoji when talking about it.
 
 
 
