@@ -356,7 +356,7 @@ Pick ONE of these two exercises (A or B) and do it.  You don't have to do both.
 (A)
 Once all your tests are passing, look at your answers for Homework 2, 3, and 4.  Write a post on Google Classroom (answer to the Homework 5 question) describing (in your own words) what parts of them are similar to each other. Are there aspects of them that seem different? Somewhat similar? Somewhat identical?  What are they?  Could you write one program that solved all three problems (or solved the hard parts of those problems? Why or why not? 
 
-(B) Think of the list `[5, 6, 2]`.  Imaging you applied the function `myProduct` to that list:  `myProduct [5, 6, 2]`.  Write a post on Google Classroom (answer to the Homework 5 question)describing the exact steps the program went through. Specifically, identify each time the function `myProduct` is called - what argument was passed into it each time, and what did it return?   Since this will get confusing very fast, identify each function call with a unique emoji when talking about it.
+(B) Think of the list `[5, 6, 2]`.  Imagine you applied the function `myProduct` to that list:  `myProduct [5, 6, 2]`.  Write a post on Google Classroom (answer to the Homework 5 question) describing the exact steps the program went through. Specifically, identify each time the function `myProduct` is called - what argument was passed into it each time, and what did it return?  Since talking about this may get confusing very fast, identify each recursive function call with a unique emoji when talking about it.
 
 
 
