@@ -345,7 +345,7 @@ Complete the function `mySum` by writing a recursive function that takes as inpu
 Complete the function `myProduct` by writing a recursive function that takes as input a list of Ints, and returns an Int that is the product (that is, the multiplication) of all those integers.
 
 #### Homework 4: Convert a string of nucleotides
-BEFORE YOU BEGIN: Go back to last week's lesson, copy your answer from Homework 2 Week 2 (your `nucleotidePattern` function), and paste it into the spot in your homework labeled "PASTE HERE".
+BEFORE YOU BEGIN: Go back to last week's lesson, copy your answer from Homework 2 Week 2 (your `nucleotidePattern` function), and paste it immediately after the line in your homework that reads 'PASTE your nucleotidePattern function from Week 2 below'.
 
 Then, complete the function `convertDNA` by writing a recursive function that takes a list of chars representing nucleotides and converts them into their complement (so, if the input list was `['T', 'T', 'G', 'G']`, you'd get back `['A', 'A', 'C', 'C']`).  You should NOT need to touch your nucleotidePattern program other than pasting it into your class program.
 
