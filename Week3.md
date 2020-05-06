@@ -228,17 +228,21 @@ The third and subsequent fibonacci numbers are the sum of the previous two fibon
 
 Working through the first few answers by hand (but not in code)
 
-`fibonacci 2` is 1, because `0 + 1 = 1`.
+`fibonacci 1` is 0, by definition.
 
-`fibonacci 3` is 2, because `1 + 1 = 2`.
+`fibonacci 2` is 0, by definition.
 
-`fibonacci 4` is 3, because `1 + 2 = 3`.
+`fibonacci 3` is 1, because `0 + 1 = 1`.
 
-`fibonacci 5` is 5, because `2 + 3 = 5`.
+`fibonacci 4` is 2, because `1 + 1 = 2`.
 
-`fibonacci 6` is 8, because `3 + 5 = 8`.
+`fibonacci 5` is 3, because `1 + 2 = 3`.
 
-`fibonacci 7` is 13, because `8 + 5 = 13`.
+`fibonacci 6` is 5, because `2 + 3 = 5`.
+
+`fibonacci 7` is 8, because `3 + 5 = 8`.
+
+`fibonacci 8` is 13, because `8 + 5 = 13`.
 
 Like factorials, fibonacci numbers get bigger surprisingly fast.  For your testing convenience, the first 29 fibonacci numbers are `0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765, 10946, 17711, 28657, 46368, 75025, 121393, 196418, 317811`.
 
