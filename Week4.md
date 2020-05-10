@@ -67,9 +67,11 @@ Please post your answer to these questions on Google Classroom.
 
 Now comes the fun part.  I'm going to hurt your brain a little.
 
-Functions in Haskell can be passed around just like values.  What I mean by this is that you can use a function as an argument to another function, or return a function as a result from a function.
+Functions in Haskell can be passed around just like values.  What I mean by this is that you can use a function as an argument to another function, or return a function as a result from a function.  
 
 Take a look at your `multByFives`, and your `addOnes` functions, and your `convertDNA` functions.  All of these functions take a list with some item type `a` and apply some transformation to each item in the list, using some function `(a -> b)`, to turn the whole list into a list of type `b`.  (It's possible for types `a` and `b` to be the same, but they don't have to be - for `multByFives` and `addOnes`, both `a` and `b` are `Int`s, but for `pg13Attendees`, `a` is an `Int` and `b` is a `Bool`.)
+
+Because we can pass around functions as if they're values, we can write a function which only contains the _generic_ parts of `multiByFives` and `addOnes` and `convertDNA` (recursing through the list), and then use a function we pass as an argument to do the _specific_ parts (like the actual addition or multiplication or conversion). 
 
 Write a function `myMap` that takes as an argument:
  * A function that goes from `(a -> b)`
@@ -81,6 +83,8 @@ In other words, your myMap should have the type signature:
 ```
 myMap :: (a -> b) -> [a] -> [b]
 ```
+
+The trickiest bit here is figuring out how to apply your passed in function to the list.
 
 Homework five is done when you can run these examples in the REPL and get the right answer:
 
