@@ -17,11 +17,11 @@ However, Haskell also supports something called a -- $10 word incoming -- _polym
 listLength :: [a] -> Int
 ```
 
-What that means is that the lowercase letter can be _of any type_.  In the case of `listLength`, for example, we don't care if it's a list of `Doubles` or `Bools` or `Strings` or anything else - we're just counting the things in it, not doing anything with them. 
+What that means is that the lowercase letter can be _of any type_.  In the case of `listLength`, for example, we don't care if it's a list of `Doubles` or `Bools` or `Strings` or anything else - we're just counting the things in it, not doing anything with them. So we just say it's a list of `a`, where `a` can be anything.
 
 You'll need this knowledge for Homework 5.
 
-## Homework 1 - Add 1 to a every number
+## Homework 1 - Add 1 to every number
 
 Write a function called `addOne` that takes an Int and returns a number that is one greater.
 
@@ -37,7 +37,7 @@ If you decide to write a type signature for this function (which might help with
 
 ## Homework 2 - Multiply every number by 5.
 
-Write a function called `multFive` that takes an Int and returns a number that is one greater.
+Write a function called `multFive` that takes an Int and returns a number that is that number multiplied by 5.
 
 Then, write a function called `multFives` that takes a _List_ of `Ints` and returns a list of Int where each number is multiplied by 5.  Your `multFives` function **must** use your `multFives` function.
 
