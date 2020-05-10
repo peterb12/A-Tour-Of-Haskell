@@ -62,7 +62,7 @@ Go back and read your `convertDNA` function from last week. Then look at `addOne
 
 Please post your answer to these questions on Google Classroom.
 
-## Homework 3 - Abstraction
+## Homework 5 - Abstraction
 
 Now comes the fun part.  I'm going to hurt your brain a little.
 
