@@ -50,7 +50,11 @@ multByFive [1, 2, 3, 4, 5]
 
 Write a function `olderThan13` that takes an `Int` (representing the age of a kid) and returns a `Bool`: True if the kid is older than 13, or False otherwise.
 
-Then, write a function `pg13Attendees`, given a list of `Int`s representing the ages of kids you know, returns a _List_ of `Bool`s where each age is either older than 13 or younger.  You **must** use your `olderThan13` function when writing this.
+Then, write a function `pg13Attendees`, given a list of `Int`s representing the ages of kids you know, returns a _List_ of `Bool`s where each item in the list is `True` if the corresponding input age was greater than 13, or `False` otherwise.  You **must** use your `olderThan13` function when writing this.
+
+```
+olderThan13 [5, 3, 20, 63, 13, 14]
+=> [False, False, True, True, False, True]
 
 ## Homework 4 - convertDNA 
 
