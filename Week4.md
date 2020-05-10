@@ -97,3 +97,5 @@ myMap pg13Attendees [5, 3, 20, 63, 13, 14]
 
 myMap convertDNA ['T', 'T', 'C', 'G', 'A']
 => ['A', 'A', 'G', 'C', 'T']
+
+Once you've done this, you have now written a map function that can take **any function that converts an `a` to a `b`** and use it to convert a list of `a` to a list of `b`. That's a pretty powerful abstraction!
