@@ -55,6 +55,7 @@ Then, write a function `pg13Attendees`, given a list of `Int`s representing the 
 ```
 olderThan13 [5, 3, 20, 63, 13, 14]
 => [False, False, True, True, False, True]
+```
 
 ## Homework 4 - convertDNA 
 
