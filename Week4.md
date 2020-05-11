@@ -37,7 +37,7 @@ SKIP THIS SECTION IF IT MAKES YOUR HEAD HURT.
 
 The complicated truth is that in Haskell, a function only ever takes one argument and returns one argument. So how does makeGreeting work?
 
-Under the covers, `makeGreeting :: String -> String -> String` doesn't mean "Takes two arguments, returns one". What it really means is that `makeGreeting` takes **one** argument and then _returns a function that takes an argument and returns one_.  It's just that when we say `makeGreeting "T'Challa" "powerful"` we immediately apply the next argument to get the final result.
+Under the covers, `makeGreeting :: String -> String -> String` doesn't mean "Takes two arguments, returns one". What it really means is that `makeGreeting` takes **one** argument and then _returns a function that takes the next argument_.  It's just that when we say `makeGreeting "T'Challa" "powerful"` we immediately apply the next argument to get the final result.
 
 You can try this out in the REPL if you want:
 
