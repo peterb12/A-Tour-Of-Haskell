@@ -7,6 +7,47 @@ To mix things up a bit: By now, you should have some idea of how to write functi
 
 No worked example this week - I'm going to give you three super-simple recursive functions to write that shouldn't give you any trouble. Homework 4 is where you think about what you did, and post on the Google Classroom.  Then, in Homework 5, we're going to take everything we know and start putting it together. The real _Dark Souls_ begins in Homework 5.
 
+### Functions Can Take Many Arguments
+
+Would you like to know the easy lie or the complicated truth?  
+
+#### The Easy Lie: Functions Can Take Many Arguments
+
+A function can take many arguments.  Here's an example you can try in your REPL - paste it into the code and click "Run" before trying it though!
+
+```
+makeGreeting :: String -> String -> String
+makeGreeting person adjective = "Hello, " ++ person ++ ", how simply " ++ adjective ++ " to see you!"
+```
+
+And in the REPL:
+
+```
+>  makeGreeting "T'Challa" "powerful"
+=> "Hello, T'Challa, how simply powerful to see you!"
+```
+
+#### The Complicated Truth
+
+SKIP THIS SECTION IF IT MAKES YOUR HEAD HURT.
+
+The complicated truth is that in Haskell, a function only ever takes one argument and returns one argument. So how does makeGreeting work?
+
+Under the covers, `makeGreeting :: String -> String -> String` doesn't mean "Takes two arguments, returns one". What it really means is that `makeGreeting` takes **one** argument and then _returns a function that takes an argument and returns one_.  It's just that when we say `makeGreeting "T'Challa" "powerful"` we immediately apply the next argument to get the final result.
+
+You can try this out in the REPL if you want:
+
+```
+   greetLeonardo = makeGreeting "Leonardo"
+   greetLeonardo "awful"
+=> "Hello, Leonardo, how simply awful to see you!"
+   greetLeonardo "smashing"
+=> "Hello, Leonardo, how simply smashing to see you!"
+```
+
+This is called "partial application", and it's a very advanced topic. You  will not need to use it for this class, but now you know it's there.
+
+
 ### A Note on Type Signatures
 
 Up until now, whenever you've seen a type signature, it's always started with an actual, real type - what we call a "concrete" type, like `Int` or `Bool` or `Double`.
