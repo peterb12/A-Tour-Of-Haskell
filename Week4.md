@@ -1,11 +1,11 @@
 # Week 4 - Generalizing Recursion
 
-Let's do some more recursion this week, and take steps towards generalizing 
+Let's do some more recursion this week, and take steps towards generalizing
 it.
 
 To mix things up a bit: By now, you should have some idea of how to write functions.  I am providing an almost blank REPL for you this week, [click here](https://repl.it/@peterb/Week-4-Generalizing-Recursion), and not providing any function names or type declarations or writing any tests for you.  Write your functions from scratch, and then prove that your functions work by testing them in the REPL.
 
-No worked example this week - I'm going to give you three super-simple recursive functions to write that shouldn't give you any trouble. Homework 4 is where you think about what you did, and post on the Google Classroom.  Then, in Homework 5, we're going to take everything we know and start putting it together. The real _Dark Souls_ begins in Homework 5.
+No worked example this week either - I'm going to give you three super-simple recursive functions to write that shouldn't give you any trouble. Homework 4 is where you think about what you did, and post on the Google Classroom.  Then, in Homework 5, we're going to take everything we know and start putting it together. The real challenge begins in Homework 5.
 
 ### Functions Can Take Many Arguments
 
@@ -56,7 +56,7 @@ This is called "partial application", and it's a very advanced topic. You  will 
 
 Up until now, whenever you've seen a type signature, it's always started with an actual, real type - what we call a "concrete" type, like `Int` or `Bool` or `Double`.
 
-However, Haskell also supports something called a -- $10 word incoming -- _polymorphic_ type, which means a type that could be one of any of a number of types.  This is a deep topic, and we're not going to get very far into it, but the upshot of this is that if you see a type that begins with a **lowercase letter** like:
+However, Haskell also supports something called a -- difficult term incoming -- _polymorphic_ type, which means a type that could be one of any of a number of types.  This is a deep topic, and we're not going to get very far into it, but the upshot of this is that if you see a type that begins with a **lowercase letter** like:
 
 ```
 listLength :: [a] -> Int
@@ -70,11 +70,17 @@ You'll need this knowledge for Homework 5.
 
 Write a function called `addOne` that takes an Int and returns a number that is one greater.
 
-Then, write a function called `addOnes` that takes a _List_ of `Ints` and returns a list of Int where each number is increased my one.  Your `addOnes` function **must** use your `addOne` function.
+Example:
+```
+addOne 1
+=> 2
+```
+
+Then, write a function called `addOnes` that takes a _List_ of `Ints` and returns a list of Int where each number is increased my one.  Your `addOnes` function **must** use your `addOne` function to accomplish this.
 
 Example:
 ```
-addOne [1, 2, 3, 4, 5]
+addOnes [1, 2, 3, 4, 5]
 => [2, 3, 4, 5, 6]
 ```
 
@@ -93,9 +99,9 @@ multByFive [1, 2, 3, 4, 5]
 ```
 ## Homework 3 - olderThan13
 
-Write a function `olderThan13` that takes an `Int` (representing the age of a kid) and returns a `Bool`: True if the kid is older than 13, or False otherwise.
+Write a function `olderThan13` that takes an `Int` (representing the age of a person) and returns a `Bool`: True if the person is older than 13, or False otherwise.
 
-Then, write a function `pg13Attendees`, given a list of `Int`s representing the ages of kids you know, returns a _List_ of `Bool`s where each item in the list is `True` if the corresponding input age was greater than 13, or `False` otherwise.  You **must** use your `olderThan13` function when writing this.
+Then, write a function `avengersEndgameMoviegoers`, given a list of `Int`s representing the ages of people you know, returns a _List_ of `Bool`s where each item in the list is `True` if the corresponding input age was greater than 13, or `False` otherwise. Avengers Endgame is pg-13, so some kids will have to wait to see what happens! You **must** use your `olderThan13` function when writing this.
 
 ```
 olderThan13 [5, 3, 20, 63, 13, 14]
@@ -110,17 +116,15 @@ Please post your answer to these questions on Google Classroom.
 
 ## Homework 5 - Abstraction
 
-Now comes the fun part.  I'm going to hurt your brain a little.
+Now comes the fun part.  This might be confusing, but once you figure it out it can be very useful.
 
-Functions in Haskell can be passed around just like values.  What I mean by this is that you can use a function as an argument to another function, or return a function as a result from a function.  
+Functions in Haskell can be passed around just like values.  What I mean by this, is that you can use a function as an argument to another function, or return a function as a result from a function.  (Add detail, explanation here. This NEEDS an example, and I don't know enough to come up with one)
 
-Take a look at your `multByFives`, and your `addOnes` functions, and your `convertDNA` functions.  All of these functions take a list with some item type `a` and apply some transformation to each item in the list, using some function `(a -> b)`, to turn the whole list into a list of type `b`.  (It's possible for types `a` and `b` to be the same, but they don't have to be - for `multByFives` and `addOnes`, both `a` and `b` are `Int`s, but for `pg13Attendees`, `a` is an `Int` and `b` is a `Bool`.)
-
-Because we can pass around functions as if they're values, we can write a function which only contains the _generic_ parts of `multiByFives` and `addOnes` and `convertDNA` (recursing through the list), and then use a function we pass as an argument to do the _specific_ parts (like the actual addition or multiplication or conversion). 
+Take a look at your `multByFives`, and your `addOnes` functions, and your `convertDNA` functions.  All of these functions take a list with some item type `a` and apply some transformation to each item in the list, using some function `(a -> b)`, to turn the whole list into a list of type `b`. `addOnes` adds one to each value, `multByFives` multiplies each value, and `convertDNA` matches each char to its complement. (It's possible for types `a` and `b` to be the same, but they don't have to be - for `multByFives` and `addOnes`, both `a` and `b` are `Int`s, but for `pg13Attendees`, `a` is an `Int` and `b` is a `Bool`.)
 
 Write a function `myMap` that takes as an argument:
  * A function that goes from `(a -> b)`
- * A list of `a`
+ * A list of `a` -- How does it take two arguments I am confused
 and returns
  * A list of `b`
 
@@ -128,8 +132,6 @@ In other words, your myMap should have the type signature:
 ```
 myMap :: (a -> b) -> [a] -> [b]
 ```
-
-The trickiest bit here is figuring out how to apply your passed in function to the list.
 
 Homework five is done when you can run these examples in the REPL and get the right answer:
 
@@ -142,5 +144,7 @@ myMap pg13Attendees [5, 3, 20, 63, 13, 14]
 
 myMap convertDNA ['T', 'T', 'C', 'G', 'A']
 => ['A', 'A', 'G', 'C', 'T']
+```
 
-Once you've done this, you have now written a map function that can take **any function that converts an `a` to a `b`** and use it to convert a list of `a` to a list of `b`. That's a pretty powerful abstraction!
+Here, myMap is taking a function and a list of values as an argument, applying the transformation in the function (add one, check if older than 13, etc.) to each value in the list, and returning the new list.
+
