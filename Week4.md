@@ -9,7 +9,9 @@ No worked example this week - I'm going to give you three super-simple recursive
 
 ### Functions Can Take Many Arguments
 
-Would you like to know the easy lie or the complicated truth?  
+For one of the homeworks today, you'll need to write a function that takes more than one argument.  As long as we're showing you how to write those, would you like to know how that works?  There are two ways to think abot it:
+
+The easy lie or the complicated truth.
 
 #### The Easy Lie: Functions Can Take Many Arguments
 
@@ -26,6 +28,8 @@ And in the REPL:
 >  makeGreeting "T'Challa" "powerful"
 => "Hello, T'Challa, how simply powerful to see you!"
 ```
+
+This idea, that functions can take multiple arguments, is absolutely how you _should_ think about functions day to day.
 
 #### The Complicated Truth
 
