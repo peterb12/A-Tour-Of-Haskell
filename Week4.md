@@ -90,11 +90,11 @@ If you decide to write a type signature for this function (which might help with
 
 Write a function called `multFive` that takes an Int and returns a number that is that number multiplied by 5.
 
-Then, write a function called `multFives` that takes a _List_ of `Ints` and returns a list of Int where each number is multiplied by 5.  Your `multFives` function **must** use your `multFives` function.
+Then, write a function called `multFives` that takes a _List_ of `Ints` and returns a list of Int where each number is multiplied by 5.  Your `multFives` function **must** use your `multFive` function.
 
 Example:
 ```
-multByFive [1, 2, 3, 4, 5]
+multFives [1, 2, 3, 4, 5]
 => [5, 10, 15, 20, 25]
 ```
 ## Homework 3 - olderThan13
@@ -104,7 +104,7 @@ Write a function `olderThan13` that takes an `Int` (representing the age of a pe
 Then, write a function `avengersEndgameMoviegoers`, given a list of `Int`s representing the ages of people you know, returns a _List_ of `Bool`s where each item in the list is `True` if the corresponding input age was greater than 13, or `False` otherwise. Avengers Endgame is pg-13, so some kids will have to wait to see what happens! You **must** use your `olderThan13` function when writing this.
 
 ```
-olderThan13 [5, 3, 20, 63, 13, 14]
+avengersEndgameMoviegoers [5, 3, 20, 63, 13, 14]
 => [False, False, True, True, False, True]
 ```
 
@@ -136,10 +136,10 @@ myMap :: (a -> b) -> [a] -> [b]
 Homework five is done when you can run these examples in the REPL and get the right answer:
 
 ```
-myMap addOnes [6, 7, 8, 9, 10]
+myMap addOne [6, 7, 8, 9, 10]
 => [7, 8, 9, 10, 11]
 
-myMap pg13Attendees [5, 3, 20, 63, 13, 14]
+myMap olderThan13 [5, 3, 20, 63, 13, 14]
 => [False, False, True, True, False, True]
 
 myMap convertDNA ['T', 'T', 'C', 'G', 'A']
