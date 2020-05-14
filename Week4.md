@@ -110,7 +110,7 @@ avengersEndgameMoviegoers [5, 3, 20, 63, 13, 14]
 
 ## Homework 4 - convertDNA 
 
-Go back and read your `convertDNA` function from last week. Then look at `addOnes` and `multByFives` and your `pg13Attendees` functions.  How are they similar?  How are they different?  If you chose to write type signatures for your functions, what are they?
+Go back and read your `convertDNA` function from last week. Then look at `addOnes` and `multByFives` and your `avengersEndgameMoviegoers` functions.  How are they similar?  How are they different?  If you chose to write type signatures for your functions, what are they?
 
 Please post your answer to these questions on Google Classroom.
 
@@ -120,11 +120,11 @@ Now comes the fun part.  This might be confusing, but once you figure it out it 
 
 Functions in Haskell can be passed around just like values.  What I mean by this, is that you can use a function as an argument to another function, or return a function as a result from a function.  
 
-Take a look at your `multByFives`, and your `addOnes` functions, and your `convertDNA` functions.  All of these functions take a list with some item type `a` and apply some transformation to each item in the list, using some function `(a -> b)`, to turn the whole list into a list of type `b`. `addOnes` adds one to each value, `multByFives` multiplies each value, and `convertDNA` matches each char to its complement. (It's possible for types `a` and `b` to be the same, but they don't have to be - for `multByFives` and `addOnes`, both `a` and `b` are `Int`s, but for `pg13Attendees`, `a` is an `Int` and `b` is a `Bool`.)
+Take a look at your `multByFives`, and your `addOnes` functions, and your `convertDNA` functions.  All of these functions take a list with some item type `a` and apply some transformation to each item in the list, using some function `(a -> b)`, to turn the whole list into a list of type `b`. `addOnes` adds one to each value, `multByFives` multiplies each value, and `convertDNA` matches each char to its complement. (It's possible for types `a` and `b` to be the same, but they don't have to be - for `multByFives` and `addOnes`, both `a` and `b` are `Int`s, but for `avengersEndgameMoviegoers`, `a` is an `Int` and `b` is a `Bool`.)
 
 Write a function `myMap` that takes as an argument:
  * A function that goes from `(a -> b)`
- * A list of `a` -- How does it take two arguments I am confused
+ * A list of `a` 
 and returns
  * A list of `b`
 
