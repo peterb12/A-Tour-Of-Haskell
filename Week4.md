@@ -118,7 +118,7 @@ Please post your answer to these questions on Google Classroom.
 
 Now comes the fun part.  This might be confusing, but once you figure it out it can be very useful.
 
-Functions in Haskell can be passed around just like values.  What I mean by this, is that you can use a function as an argument to another function, or return a function as a result from a function.  (Add detail, explanation here. This NEEDS an example, and I don't know enough to come up with one)
+Functions in Haskell can be passed around just like values.  What I mean by this, is that you can use a function as an argument to another function, or return a function as a result from a function.  
 
 Take a look at your `multByFives`, and your `addOnes` functions, and your `convertDNA` functions.  All of these functions take a list with some item type `a` and apply some transformation to each item in the list, using some function `(a -> b)`, to turn the whole list into a list of type `b`. `addOnes` adds one to each value, `multByFives` multiplies each value, and `convertDNA` matches each char to its complement. (It's possible for types `a` and `b` to be the same, but they don't have to be - for `multByFives` and `addOnes`, both `a` and `b` are `Int`s, but for `pg13Attendees`, `a` is an `Int` and `b` is a `Bool`.)
 
