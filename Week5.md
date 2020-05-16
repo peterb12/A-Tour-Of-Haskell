@@ -40,7 +40,7 @@ for item in [1,2,3,4,5,6,7]:
   newList.append(item ** 2)
 ```
 
-Using `map` lets you think about this operation in a much simpler way!  (Note: Python has its own version of `map`, but many people don't know about it...)
+Using `map` lets you think about this operation in a much simpler way! In Haskell, we said **what we want**, and in Python, we said **how to get what we want**. Often, saying how to get what we want is more complicated than just saying what we want. (Note: Python has its own version of `map`, but many people don't know about it...)
 
 OK, so `map` will let us transform each element of a list. What other higher order functions are there?
 
