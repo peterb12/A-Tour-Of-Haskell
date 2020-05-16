@@ -71,13 +71,13 @@ There's another Haskell function, `filter`, which will take a function that retu
 You knew it was coming:  Write a function `myFilter`.  Since lots of people had trouble with the type signatures last week, this week we are providing them for you.
 
 Inputs: 
-* a predicate function that goes from (a -> Bool)
+* a predicate function that goes from `(a -> Bool)` ("Given this a, is it true or false?"
 * A list of type [a]
 
 Output:
 * A list of type [a], where `(f a)` for each item in the list returned `True`
 
-HINT: You should write this as a recursive function (in fact, we gave you a head start and provided the base case. Your job is to replace the word `undefined` with an actual function.  Don't use `filter` in your implementation, the point here is to write it yourself.
+HINT: You should write this as a recursive function (in fact, we gave you a head start and provided the base case.) Your job is to replace the word `undefined` with an actual function.  Don't use `filter` in your implementation, the point here is to write it yourself.
 
 ## List Origami
 
@@ -87,7 +87,7 @@ You've already written functions that reduce things!  Remember in Week 3, you wr
 
 How important are `map` and `reduce`?  Here's a hint: the algorithm that allowed Google to index the entire internet, that their entire business is based upon, is called _MapReduce_.  They're not literally the same functions we are talking about here, but they are closely related.
 
-In Haskell, instead of using the term _reduce_ they call it a _fold_, but it's the same thing.  Specifically, it's `foldr` with the "r" meaning "right" (as opposed to left).  foldr has a pretty complicated type signature, and we're going to try to not use it for this class, so consider this optional.
+In Haskell, instead of using the term _reduce_ they call it a _fold_, but it's the same thing.  Specifically, it's `foldr` with the "r" meaning "right" (as opposed to left).  `foldr` has a pretty complicated type signature, and we're going to try to not use it for this class, so consider this optional.
 
 ```
 foldr :: (a -> b -> b) -> b -> [a] -> b
@@ -123,6 +123,41 @@ Dr. DeMore has asked you to write a program to let her computer dial her phone f
 
 HINT: the Haskell library `Data.Char`, which is imported in our class program, has a useful predicate [isDigit](http://zvon.org/other/haskell/Outputchar/isDigit_f.html).  I've linked to the documntation for it.  You may use this predicate if you want, or write your own.
 
+Don't write this as a recursive function!  Use a higher-order function to do the heavy lifting for you.  The best solution will be just one line.
+
+## HOMEWORK 4: Any and All
+
+Write a function `myAny` which has the following type signature:
+
+```
+myAny :: (a -> Bool) -> [a] -> Bool
+```
+
+In other words, it takes a function that returns `True` or `False` for a given `a`, and then will return True if the list `[a]` has any members for which that value is true.
+
+```
+> myAny odd [4, 6, 2, 7, 3, 17]
+=> True
+> myAny odd [4, 6, 2]
+=> False
+```
+Next, write:
+
+```
+myAll :: (a -> Bool) -> [a] -> Bool
+```
+
+This is similar to `any`, but instead will _only_ return `True` if _every member of the list` passes the predicate.
+
+```
+> myAll even [4, 6, 2, 7, 3, 17]
+=> False
+> myAll even [4, 6, 2]
+=> True
+```
+
+
+
 ## Data types: Sum Types
 
 Up until now, we've been using Haskell's built in data types, like Strings.  Strings can be a pain to work with, however, because they can have all sorts of data in them, like the parentheses in our phone numbers in homework 3, or the "garbage" nucleotides in our DNA example in week 2. Haskell lets us easily create our own custom datatypes which **only** support exactly the values we want. This is very powerful way to let us write simpler code - typically, you'll have a "skin" on your program that converts from Strings to some internal data type, and then all of your internal code can be _much_ simpler because it won't have to worry about bad input!
@@ -150,7 +185,7 @@ data Nucleotide = Adenine | Guanine | Cystine | Thymine deriving (Show, Ord, Eq)
 
 The `|` character in that declaration is read as "or".  This says that our data type `Nucleotide` can only be one of those four words, _and nothing else_.  This is called a _sum type_ or sometimes a _tagged union_; I'll call them Sum Types.  A sum type represents an **exclusive choice** from a set of values.  So in our current example, if I say that the variable `rna` is of the type `Nucleotide` I am making you an _ironclad guarantee_ that it is one of an `Adenine`, a `Guanine`, a `Cystine`, or a `Thymine`, and that it can not be any other possible thing in the universe.
 
-Those words are now special. They're not strings, they're now actually _values_.  In the example that follows, note that we are **not putting those words in double-quotes**.  Effectively, we have turned them into language keywords in our program - they are _values_.  The fancy term for this type of value is **data constructor** (remember that term, because it's going to appear again in homework 4.)
+Those words are now special. They're not strings, they're now actually _values_.  In the example that follows, note that we are **not putting those words in double-quotes**.  Effectively, we have turned them into language keywords in our program - they are _values_.  The fancy term for this type of value is **data constructor** (remember that term, because it's going to appear again in homework 5.)
 
 The `deriving (Show, Ord, Eq)` is a little bit of magic that will make this work better in our REPL: the `Show` means that Haskell will know to print it out using its name, the `Ord` means it will consider them to have an ordering based on how we typed them, and the `Eq` means that Haskell will allow you to compare them with the = sign.  
 
@@ -175,7 +210,7 @@ Try typing `betterComplement Cystine` into the REPL to see what happens.  You sh
 => Guanine
 ```
 
-## Homework 4: Playing Cards
+## Homework 5: Playing Cards
 
 A deck of playing cards is composed of 52 playing cards, not counting jokers.
 
@@ -192,7 +227,7 @@ A `Rank` data type that represents all possible ranks.
 
 If this sounds complicated, you're overthinking it.  Just use simple names for the data constructors.  Data constructors `must` start with a capital letter, and I suggest you don't use funny symbols or numbers.
 
-## Homework 5: Post on Google Classroom.
+## Homework 6: Post on Google Classroom.
 
 First, and most importantly, I want you to post on the classroom telling me the most awesome thing you did this week.  It doesn't need to have anything to do with this class, just tell us something you did that was fun.
 
