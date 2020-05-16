@@ -8,7 +8,7 @@ The [class program for this week is here](https://repl.it/@peterb/Week-5-Higher-
 
 ## Dora, Say "Map"
 
-Last week you wrote a function `myMap` which takes a function from `a -> b` and applies it to `[a]` (a list of type a) and returns a list of type b.  This is what we call a _higher order function_, and it's the answer to the qeustion "Are you saying we do all loops in Haskell by recursion?"  We do, but we usually do them by using higher order functions.
+Last week you wrote a function `myMap` which takes a function from `a -> b` and applies it to `[a]` (a list of type `a`) and returns a list of type `b`.  This is what we call a _higher order function_, and it's the answer to the question "Are you saying we do all loops in Haskell by recursion?"  We do, but we usually do them by using higher order functions.
 
 Think about what we use loops for:
 
@@ -21,8 +21,8 @@ In fact, `map` is a standard Haskell library function that does the first task, 
 Using `map` we can easily transform entire lists of data:
 
 ```
-  map (++ " is cool") ["Arvind", "Hanna", "Haley"]
-=> ["Arvind is cool","Hanna is cool","Haley is cool"]
+  map (++ " is cool") ["Arnav", "Taylor", "Hannah", "Rex"]
+=> ["Arnav is cool","Taylor is cool","Hanna is cool","Rex is cool"]
 ```
 
 Want to take a list of numbers and get their squares? Map makes it easy. (`^` is an operator that says "for `a ^ b`, raise a to exponent b)
