@@ -55,7 +55,7 @@ Remember last week when we wrote a function `avengersEndgameMovieGoers` that did
 
 That's an example of a map: we mapped from an integer (the age of the moviegoer) to a Boolean (whether they were older than 13.)
 
-There's another Haskell function, `filter`, which will take a function that takes an item and returns `True` or `False` (called a "predicate") and then either _include_ or _exclude_ each item as a member of a new list, depending on whether the predicate is `True` or `False`.
+There's another Haskell function, `filter`, which will take a function that returns `True` or `False` (called a "predicate") and then either _include_ or _exclude_ each item as a member of a new list, depending on whether the predicate is `True` or `False`.
 
 ```
 > filter (>13) [5, 3, 20, 63, 13, 14]
@@ -85,7 +85,7 @@ There's one more major category of higher-order function you should known about:
 
 You've already written functions that reduce things!  Remember in Week 3, you wrote `myProduct`, which takes a list like `[1, 2, 3]` and determined the product, `6` (in other words, `1 * 2 * 3`.)
 
-How important are `map` and `reduce`?  Here's a hint: the algorithm that allowed Google to index the entire internet, that their entire business is based upon, is called _MapReduce_.  They're not literally the same functions we are talking about here, but they are closely related.
+How important are `map` and `reduce`?  Here's a hint: the algorithm that allowed Google to index the entire internet, and that their entire business is based upon, is called _MapReduce_.  They're not literally the same functions we are talking about here, but they are closely related.
 
 In Haskell, instead of using the term _reduce_ they call it a _fold_, but it's the same thing.  Specifically, it's `foldr` with the "r" meaning "right" (as opposed to left).  `foldr` has a pretty complicated type signature, and we're going to try to not use it for this class, so consider this optional.
 
@@ -113,43 +113,20 @@ Hopefully this example helps explain why the "initial value" argument is necessa
 
 ### OPTIONAL: HOMEWORK 2 (advanced)
 
-**You should probably skip this assignment and come back to it when you feel ready for a challenge.**
+Write `myFoldr`. This is tough.  Consider doing the rest of this lesson first and then saving this for last. If you can do this, take a victory lap on Google Classroom and show everyone your implementation. 
 
-Write `myFoldr`. It should behave exactly the same as `foldr`.
+As before, the solution should be recursive, but since there are multiple arguments, it's pretty easy to get lost.  I gave you the base case for free; replace the `undefined` clause with your recursive case./
 
-This means it takes the same arguments as `foldr` (a function that takes two arguments and returns one, an initial value, and a list) and returns a value of the same type as is in the list.
+## HOMEWORK 3: Numbers Only, Please
 
-This is tough.  Consider doing the rest of this lesson first and then saving this for last. If you can do this, take a victory lap on Google Classroom and show everyone your implementation. 
+Dr. DeMore has asked you to write a program to let her computer dial her phone for her.  Sadly, her phone system doesn't know how to handle special characters, and can only manage numbers, so a format like "(724) 555-1212" confuses it.  Write a function "phoneNumberSimple" which will take a number with punctuation like that and convert it to a number-only string such as "7245551212".
 
-As before, the solution should be recursive, but since there are multiple arguments, it's pretty easy to get lost.  I gave you the base case for free; replace the `undefined` clause with your recursive case.
+HINT: the Haskell library `Data.Char`, which is imported in our class program, has a useful predicate [isDigit](http://zvon.org/other/haskell/Outputchar/isDigit_f.html).  I've linked to the documntation for it.  You may use this predicate if you want, or write your own.
 
-To test your `myFoldr`, try these:
+Don't write this as a recursive function!  Use one of the higher-order functions we talked about to do the heavy lifting for you.  The best solution will be just one line.
 
-```
-> foldr (*) 1 [2, 3, 4, 5]
-=> 120
 
-> foldr (++) [] ["Super", "cali", "fragi", "listic", "expi", "ali", "docious"]
-=> "Supercalifragilisticexpialidocious"
-```
-
-### HOMEWORK 3: Numbers Only, Please
-
-Dr. DeMore has asked you to write a program to let her computer dial her phone for her.  Sadly, her phone system doesn't know how to handle special characters, only numbers, so a number like "(724) 555-1212" confuses it.  Write a function "phoneNumberSimple" which will take a number with punctuation like that and convert it to a number-only string such as "7245551212".
-
-HINT: the Haskell library `Data.Char`, which is already imported and ready for use in our class program, has a useful predicate [isDigit](http://zvon.org/other/haskell/Outputchar/isDigit_f.html).  I've linked to the documntation for it - you don't have to do anything difficult here, you can just use `isDigit` as if it's a function you wrote.  After clicking Run, you can test it in the repl:
-
-```
-> isDigit 'a'
-=> False
-> isDigit '9'
-=> True
-```
-You may use this predicate if you want, or write your own.
-
-Don't write this as a recursive function!  Use a higher-order function to do the heavy lifting for you.  The best solution will be just one line.
-
-### HOMEWORK 4: Any and All
+## HOMEWORK 4: Any and All
 
 Write a function `myAny` which has the following type signature:
 
@@ -171,7 +148,7 @@ Next, write:
 myAll :: (a -> Bool) -> [a] -> Bool
 ```
 
-This is similar to `any`, but instead will _only_ return `True` if _every member of the list_ passes the predicate.
+This is similar to `any`, but instead will _only_ return `True` if _every member of the list` passes the predicate.
 
 ```
 > myAll even [4, 6, 2, 7, 3, 17]
@@ -225,16 +202,18 @@ betterComplement Guanine = Cytosine
 
 Go ahead and replace the betterComplement function in the class REPL with that.
 
-We don't even need a wildcard case here because it's **literally impossible** for us to compile code that feeds in a bad value to this function.  (Our "skin" code - which is not here, because we didn't write it - that converts from things the user types _into_ this data type will still need that wildcard case, and next week we'll introduce the idea of `Maybe` which is how we will handle it).
+We don't even need a wildcard case here because it's **literally impossible** for us to compile code that feeds in a bad value to this function.  (Our "skin" code that converts from things the user types _into_ this data type will still need that wildcard case, and next week we'll introduce the idea of `Maybe` which is how we will handle it).
+
 
 After clicking "Run" again, typing `betterComplement Cytosine` into the REPL to see what happens.  You should get
+
 
 ```
 >  betterComplement Cytosine
 => Guanine
 ```
 
-### Homework 5: Playing Cards
+## Homework 5: Playing Cards
 
 A deck of playing cards is composed of 52 playing cards, not counting jokers.
 
@@ -246,13 +225,13 @@ So to represent a card, we need both a rank **and** a suit, and I haven't shown 
 
 Using a sum type (a type that uses `|` to define alternative values), define two data types:
 
-* A `Suit` data type that represents all possible suits.
-* A `Rank` data type that represents all possible ranks.
+A `Suit` data type that represents all possible suits.
+A `Rank` data type that represents all possible ranks.
 
-If this sounds complicated, you're overthinking it.  Just use simple names for the data constructors.  Both type names and data constructors **must** start with a capital letter, and I suggest you don't use funny symbols or numbers.
+If this sounds complicated, you're overthinking it.  Just use simple names for the data constructors.  Data constructors `must` start with a capital letter, and I suggest you don't use funny symbols or numbers.
 
-### Homework 6: Post on Google Classroom.
+## Homework 6: Post on Google Classroom.
 
-First, and most importantly, I want you to post on the classroom telling the class the most awesome thing you did this week.  It doesn't need to have anything to do with this class, just tell us something you did that was fun.
+First, and most importantly, I want you to post on the classroom telling me the most awesome thing you did this week.  It doesn't need to have anything to do with this class, just tell us something you did that was fun.
 
 Second, although we haven't talked about how to do "and" types, tell the class how you think, given a rank and a suit, we might represent a single playing card in a reasonable programming language.  If you have used another programming language where you think you know how to represent it, feel free to give that as an example, or just describe it in words.
