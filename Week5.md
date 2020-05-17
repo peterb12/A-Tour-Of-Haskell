@@ -151,7 +151,7 @@ Don't write this as a recursive function!  Use a higher-order function to do the
 
 ### HOMEWORK 4: Any and All
 
-Write a higher-order function `myAny` which has the following type signature:
+Write a function `myAny` which has the following type signature:
 
 ```
 myAny :: (a -> Bool) -> [a] -> Bool
@@ -159,23 +159,19 @@ myAny :: (a -> Bool) -> [a] -> Bool
 
 In other words, it takes a function that returns `True` or `False` for a given `a`, and then will return True if the list `[a]` has any members for which that value is true.
 
-You _will_ write this using explicit recursion.)
-
 ```
 > myAny odd [4, 6, 2, 7, 3, 17]
 => True
 > myAny odd [4, 6, 2]
 => False
 ```
-Next, write the higher order function `myAll`:
+Next, write:
 
 ```
 myAll :: (a -> Bool) -> [a] -> Bool
 ```
 
 This is similar to `any`, but instead will _only_ return `True` if _every member of the list_ passes the predicate.
-
-As with `myAny`, you _will_ use explicit recursion in this homework.
 
 ```
 > myAll even [4, 6, 2, 7, 3, 17]
@@ -184,7 +180,6 @@ As with `myAny`, you _will_ use explicit recursion in this homework.
 => True
 ```
 
-**OPTIONAL CHALLENGE**: The easiest way to write both `myAny` and `myAll` is probably just to use recursion, as when you wrote `myMap`.  There is another way: you could implement both of these functions without explicitly recursing by using `foldr`.  If you want an extra challenge, try that out. Don't feel bad if you can't figure it out - `foldr` can be tricky to wrap your brain around until you have practice.
 
 
 ## Data types: Sum Types
@@ -214,9 +209,9 @@ data Nucleotide = Adenine | Guanine | Cytosine | Thymine deriving (Show, Ord, Eq
 
 The `|` character in that declaration is read as "or".  This says that our data type `Nucleotide` can only be one of those four words, _and nothing else_.  This is called a _sum type_ or sometimes a _tagged union_; I'll call them sum types.  A sum type represents an **exclusive choice** from a set of values.  So in our current example, if I say that the variable `rna` is of the type `Nucleotide` I am making you an _ironclad guarantee_ that it is one of an `Adenine`, a `Guanine`, a `Cytosine`, or a `Thymine`, and that it can not be any other possible thing in the universe.
 
-Those words are now special. They're not strings, they're now actually _values_.  In the example that follows, note that we are **not putting those words in double-quotes**.  Effectively, we have turned them into language keywords in our program - they are _values_.  The fancy term for this type of value is **data constructor** (remember that term, because it's going to appear again in homework 5.)
+Those words are now special. They're not strings, they're now actually _values_.  In the example that follows, note that we are **not putting those words in double-quotes**.  Effectively, we have turned them into language keywords in our program - they are _values_, like the integer 3.  The fancy term for this type of value is **data constructor** (remember that term, because it's going to appear again in homework 5.)
 
-The `deriving (Show, Ord, Eq)` is a little bit of magic that will make this work better in our REPL: the `Show` means that Haskell will know how to print it, the `Ord` means it will consider the values to have an ordering based on how we typed them, and the `Eq` means that Haskell will allow you to compare them with the `==` operator.  For right now, if you define a data type, just go ahead and throw `deriving (Show, Ord, Eq)` on the end and it will almost certainly be what you want. 
+The `deriving (Show, Ord, Eq)` is a little bit of magic that will make this work better in our REPL: the `Show` means that Haskell will know to print it out using its name, and the `Ord` means it will consider them to have an ordering based on how we typed them. For example, if you were creating a type for the alphabet, you might type the letters in in alphabetical order. The `Eq` means that Haskell will allow you to compare them with the = sign.  For right now, if you define a data type, just go ahead and throw `deriving (Show, Ord, Eq)` on the end and it will almost certainly be what you want. 
 
 This lets us define a new function in terms of that data type:
 
@@ -260,4 +255,4 @@ If this sounds complicated, you're overthinking it.  Just use simple names for t
 
 First, and most importantly, I want you to post on the classroom telling the class the most awesome thing you did this week.  It doesn't need to have anything to do with this class, just tell us something you did that was fun.
 
-Second, although we haven't talked about to do "and" types, tell the class how you think, given a rank and a suit, we might represent a single playing card in a reasonable programming language.  If you have used another programming language where you think you know how to represent it, feel free to give that as an example, or just describe it in words.
+Second, although we haven't talked about how to do "and" types, tell the class how you think, given a rank and a suit, we might represent a single playing card in a reasonable programming language.  If you have used another programming language where you think you know how to represent it, feel free to give that as an example, or just describe it in words.
