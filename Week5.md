@@ -133,7 +133,7 @@ To test your `myFoldr`, try these:
 => "Supercalifragilisticexpialidocious"
 ```
 
-## HOMEWORK 3: Numbers Only, Please
+### HOMEWORK 3: Numbers Only, Please
 
 Dr. DeMore has asked you to write a program to let her computer dial her phone for her.  Sadly, her phone system doesn't know how to handle special characters, only numbers, so a number like "(724) 555-1212" confuses it.  Write a function "phoneNumberSimple" which will take a number with punctuation like that and convert it to a number-only string such as "7245551212".
 
@@ -141,7 +141,7 @@ HINT: the Haskell library `Data.Char`, which is already imported and ready for u
 
 Don't write this as a recursive function!  Use a higher-order function to do the heavy lifting for you.  The best solution will be just one line.
 
-## HOMEWORK 4: Any and All
+### HOMEWORK 4: Any and All
 
 Write a function `myAny` which has the following type signature:
 
@@ -226,7 +226,7 @@ Try typing `betterComplement Cystine` into the REPL to see what happens.  You sh
 => Guanine
 ```
 
-## Homework 5: Playing Cards
+### Homework 5: Playing Cards
 
 A deck of playing cards is composed of 52 playing cards, not counting jokers.
 
@@ -243,7 +243,7 @@ A `Rank` data type that represents all possible ranks.
 
 If this sounds complicated, you're overthinking it.  Just use simple names for the data constructors.  Data constructors `must` start with a capital letter, and I suggest you don't use funny symbols or numbers.
 
-## Homework 6: Post on Google Classroom.
+### Homework 6: Post on Google Classroom.
 
 First, and most importantly, I want you to post on the classroom telling me the most awesome thing you did this week.  It doesn't need to have anything to do with this class, just tell us something you did that was fun.
 
