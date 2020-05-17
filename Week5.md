@@ -163,7 +163,7 @@ Next, write:
 myAll :: (a -> Bool) -> [a] -> Bool
 ```
 
-This is similar to `any`, but instead will _only_ return `True` if _every member of the list` passes the predicate.
+This is similar to `any`, but instead will _only_ return `True` if _every member of the list_ passes the predicate.
 
 ```
 > myAll even [4, 6, 2, 7, 3, 17]
