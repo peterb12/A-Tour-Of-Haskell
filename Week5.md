@@ -113,9 +113,25 @@ Hopefully this example helps explain why the "initial value" argument is necessa
 
 ### OPTIONAL: HOMEWORK 2 (advanced)
 
-Write `myFoldr`. This is tough.  Consider doing the rest of this lesson first and then saving this for last. If you can do this, take a victory lap on Google Classroom and show everyone your implementation. 
+**You should probably skip this assignment and come back to it when you feel ready for a challenge.**
+
+Write `myFoldr`. It should behave exactly the same as `foldr`.
+
+This means it takes the same arguments as `foldr` (a function that takes two arguments and returns one, an initial value, and a list) and returns a value of the same type as is in the list.
+
+This is tough.  Consider doing the rest of this lesson first and then saving this for last. If you can do this, take a victory lap on Google Classroom and show everyone your implementation. 
 
 As before, the solution should be recursive, but since there are multiple arguments, it's pretty easy to get lost.  I gave you the base case for free; replace the `undefined` clause with your recursive case.
+
+To test your `myFoldr`, try these:
+
+```
+> foldr (*) 1 [2, 3, 4, 5]
+=> 120
+
+> foldr (++) [] ["Super", "cali", "fragi", "listic", "expi", "ali", "docious"]
+=> "Supercalifragilisticexpialidocious"
+```
 
 ## HOMEWORK 3: Numbers Only, Please
 
