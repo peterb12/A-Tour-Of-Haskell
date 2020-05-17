@@ -245,6 +245,6 @@ If this sounds complicated, you're overthinking it.  Just use simple names for t
 
 ### Homework 6: Post on Google Classroom.
 
-First, and most importantly, I want you to post on the classroom telling me the most awesome thing you did this week.  It doesn't need to have anything to do with this class, just tell us something you did that was fun.
+First, and most importantly, I want you to post on the classroom telling the class the most awesome thing you did this week.  It doesn't need to have anything to do with this class, just tell us something you did that was fun.
 
 Second, although we haven't talked about to do "and" types, tell the class how you think, given a rank and a suit, we might represent a single playing card in a reasonable programming language.  If you have used another programming language where you think you know how to represent it, feel free to give that as an example, or just describe it in words.
