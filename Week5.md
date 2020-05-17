@@ -247,7 +247,7 @@ Each card consists of a rank, which can range from Ace, the numbers Two through 
 
 Each card _also_ consists of a suit, which can be Hearts, Spades, Clubs, or Diamonds.
 
-So to represent a card, we need both a rank **and** a suit, and I haven't shown you how to do that yet.  But we **have** talked about how to represent "or" values with Sum types.
+So to represent a card, we need both a rank **and** a suit, and I haven't shown you how to do that yet.  But we **have** talked about how to represent "or" values, like our nucleotides, with Sum types.
 
 Using a sum type (a type that uses `|` to define alternative values), define two data types:
 
