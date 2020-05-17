@@ -128,7 +128,7 @@ Don't write this as a recursive function!  Use one of the higher-order functions
 
 ## HOMEWORK 4: Any and All
 
-Write a function `myAny` which has the following type signature:
+Write a higher-order function `myAny` which has the following type signature:
 
 ```
 myAny :: (a -> Bool) -> [a] -> Bool
@@ -136,19 +136,23 @@ myAny :: (a -> Bool) -> [a] -> Bool
 
 In other words, it takes a function that returns `True` or `False` for a given `a`, and then will return True if the list `[a]` has any members for which that value is true.
 
+You _will_ write this using explicit recursion.)
+
 ```
 > myAny odd [4, 6, 2, 7, 3, 17]
 => True
 > myAny odd [4, 6, 2]
 => False
 ```
-Next, write:
+Next, write the higher order function `myAll`:
 
 ```
 myAll :: (a -> Bool) -> [a] -> Bool
 ```
 
 This is similar to `any`, but instead will _only_ return `True` if _every member of the list` passes the predicate.
+
+As with `myAny`, you _will_ use explicit recursion in this homework.
 
 ```
 > myAll even [4, 6, 2, 7, 3, 17]
@@ -157,6 +161,7 @@ This is similar to `any`, but instead will _only_ return `True` if _every member
 => True
 ```
 
+**OPTIONAL CHALLENGE**: The easiest way to write both `myAny` and `myAll` is probably just to use recursion, as when you wrote `myMap`.  There is another way: you could implement both of these functions without explicitly recursing by using `foldr`.  If you want an extra challenge, try that out. Don't feel bad if you can't figure it out - `foldr` can be tricky to wrap your brain around until you have practice.
 
 
 ## Data types: Sum Types
@@ -181,14 +186,14 @@ But that last wildcard pattern is sort of a problem - there is no "X" nucleotide
 Let's define a nucleotide type:
 
 ```
-data Nucleotide = Adenine | Guanine | Cystine | Thymine deriving (Show, Ord, Eq)
+data Nucleotide = Adenine | Guanine | Cytosine | Thymine deriving (Show, Ord, Eq)
 ```
 
-The `|` character in that declaration is read as "or".  This says that our data type `Nucleotide` can only be one of those four words, _and nothing else_.  This is called a _sum type_ or sometimes a _tagged union_; I'll call them Sum Types.  A sum type represents an **exclusive choice** from a set of values.  So in our current example, if I say that the variable `rna` is of the type `Nucleotide` I am making you an _ironclad guarantee_ that it is one of an `Adenine`, a `Guanine`, a `Cystine`, or a `Thymine`, and that it can not be any other possible thing in the universe.
+The `|` character in that declaration is read as "or".  This says that our data type `Nucleotide` can only be one of those four words, _and nothing else_.  This is called a _sum type_ or sometimes a _tagged union_; I'll call them sum types.  A sum type represents an **exclusive choice** from a set of values.  So in our current example, if I say that the variable `rna` is of the type `Nucleotide` I am making you an _ironclad guarantee_ that it is one of an `Adenine`, a `Guanine`, a `Cytosine`, or a `Thymine`, and that it can not be any other possible thing in the universe.
 
 Those words are now special. They're not strings, they're now actually _values_.  In the example that follows, note that we are **not putting those words in double-quotes**.  Effectively, we have turned them into language keywords in our program - they are _values_.  The fancy term for this type of value is **data constructor** (remember that term, because it's going to appear again in homework 5.)
 
-The `deriving (Show, Ord, Eq)` is a little bit of magic that will make this work better in our REPL: the `Show` means that Haskell will know to print it out using its name, the `Ord` means it will consider them to have an ordering based on how we typed them, and the `Eq` means that Haskell will allow you to compare them with the = sign.  
+The `deriving (Show, Ord, Eq)` is a little bit of magic that will make this work better in our REPL: the `Show` means that Haskell will know how to print it, the `Ord` means it will consider the values to have an ordering based on how we typed them, and the `Eq` means that Haskell will allow you to compare them with the `==` operator.  For right now, if you define a data type, just go ahead and throw `deriving (Show, Ord, Eq)` on the end and it will almost certainly be what you want. 
 
 This lets us define a new function in terms of that data type:
 
@@ -196,18 +201,20 @@ This lets us define a new function in terms of that data type:
 betterComplement :: Nucleotide -> Nucleotide
 betterComplement Adenine = Thymine
 betterComplement Thymine = Adenine
-betterComplement Cystine = Guanine
-betterComplement Guanine = Cystine
+betterComplement Cytosine = Guanine
+betterComplement Guanine = Cytosine
 ```
 
 Go ahead and replace the betterComplement function in the class REPL with that.
 
 We don't even need a wildcard case here because it's **literally impossible** for us to compile code that feeds in a bad value to this function.  (Our "skin" code that converts from things the user types _into_ this data type will still need that wildcard case, and next week we'll introduce the idea of `Maybe` which is how we will handle it).
 
-Try typing `betterComplement Cystine` into the REPL to see what happens.  You should get
+
+After clicking "Run" again, typing `betterComplement Cytosine` into the REPL to see what happens.  You should get
+
 
 ```
->  betterComplement Cystine
+>  betterComplement Cytosine
 => Guanine
 ```
 
@@ -219,7 +226,7 @@ Each card consists of a rank, which can range from Ace, the numbers Two through 
 
 Each card _also_ consists of a suit, which can be Hearts, Spades, Clubs, or Diamonds.
 
-So to represent a card, we need both a rank **and** a suit, and I haven't shown you how to do that yet.  But we **have** talked about how to represent "or" values with Sum types.
+So to represent a card, we need both a rank **and** a suit, and I haven't shown you how to do that yet.  But we **have** talked about how to represent "or" values, like our nucleotides, with Sum types.
 
 Using a sum type (a type that uses `|` to define alternative values), define two data types:
 
