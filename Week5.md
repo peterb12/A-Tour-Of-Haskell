@@ -241,7 +241,7 @@ Using a sum type (a type that uses `|` to define alternative values), define two
 * A `Suit` data type that represents all possible suits.
 * A `Rank` data type that represents all possible ranks.
 
-If this sounds complicated, you're overthinking it.  Just use simple names for the data constructors.  Data constructors _must_ start with a capital letter, and I suggest you don't use funny symbols or numbers.
+If this sounds complicated, you're overthinking it.  Just use simple names for the data constructors.  Both type names and data constructors **must** start with a capital letter, and I suggest you don't use funny symbols or numbers.
 
 ### Homework 6: Post on Google Classroom.
 
