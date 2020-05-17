@@ -151,7 +151,7 @@ Don't write this as a recursive function!  Use a higher-order function to do the
 
 ### HOMEWORK 4: Any and All
 
-Write a function `myAny` which has the following type signature:
+Write a higher-order function `myAny` which has the following type signature:
 
 ```
 myAny :: (a -> Bool) -> [a] -> Bool
@@ -159,19 +159,23 @@ myAny :: (a -> Bool) -> [a] -> Bool
 
 In other words, it takes a function that returns `True` or `False` for a given `a`, and then will return True if the list `[a]` has any members for which that value is true.
 
+You _will_ write this using explicit recursion.)
+
 ```
 > myAny odd [4, 6, 2, 7, 3, 17]
 => True
 > myAny odd [4, 6, 2]
 => False
 ```
-Next, write:
+Next, write the higher order function `myAll`:
 
 ```
 myAll :: (a -> Bool) -> [a] -> Bool
 ```
 
 This is similar to `any`, but instead will _only_ return `True` if _every member of the list_ passes the predicate.
+
+As with `myAny`, you _will_ use explicit recursion in this homework.
 
 ```
 > myAll even [4, 6, 2, 7, 3, 17]
@@ -180,6 +184,7 @@ This is similar to `any`, but instead will _only_ return `True` if _every member
 => True
 ```
 
+**OPTIONAL CHALLENGE**: The easiest way to write both `myAny` and `myAll` is probably just to use recursion, as when you wrote `myMap`.  There is another way: you could implement both of these functions without explicitly recursing by using `foldr`.  If you want an extra challenge, try that out. Don't feel bad if you can't figure it out - `foldr` can be tricky to wrap your brain around until you have practice.
 
 
 ## Data types: Sum Types
