@@ -216,7 +216,7 @@ The `|` character in that declaration is read as "or".  This says that our data 
 
 Those words are now special. They're not strings, they're now actually _values_.  In the example that follows, note that we are **not putting those words in double-quotes**.  Effectively, we have turned them into language keywords in our program - they are _values_.  The fancy term for this type of value is **data constructor** (remember that term, because it's going to appear again in homework 5.)
 
-The `deriving (Show, Ord, Eq)` is a little bit of magic that will make this work better in our REPL: the `Show` means that Haskell will know to print it out using its name, the `Ord` means it will consider them to have an ordering based on how we typed them, and the `Eq` means that Haskell will allow you to compare them with the = sign.  For right now, if you define a data type, just go ahead and throw `deriving (Show, Ord, Eq)` on the end and it will almost certainly be what you want. 
+The `deriving (Show, Ord, Eq)` is a little bit of magic that will make this work better in our REPL: the `Show` means that Haskell will know how to print it, the `Ord` means it will consider the values to have an ordering based on how we typed them, and the `Eq` means that Haskell will allow you to compare them with the `==` operator.  For right now, if you define a data type, just go ahead and throw `deriving (Show, Ord, Eq)` on the end and it will almost certainly be what you want. 
 
 This lets us define a new function in terms of that data type:
 
