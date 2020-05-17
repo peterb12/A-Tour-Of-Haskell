@@ -209,10 +209,10 @@ But that last wildcard pattern is sort of a problem - there is no "X" nucleotide
 Let's define a nucleotide type:
 
 ```
-data Nucleotide = Adenine | Guanine | Cystine | Thymine deriving (Show, Ord, Eq)
+data Nucleotide = Adenine | Guanine | Cytosine | Thymine deriving (Show, Ord, Eq)
 ```
 
-The `|` character in that declaration is read as "or".  This says that our data type `Nucleotide` can only be one of those four words, _and nothing else_.  This is called a _sum type_ or sometimes a _tagged union_; I'll call them sum types.  A sum type represents an **exclusive choice** from a set of values.  So in our current example, if I say that the variable `rna` is of the type `Nucleotide` I am making you an _ironclad guarantee_ that it is one of an `Adenine`, a `Guanine`, a `Cystine`, or a `Thymine`, and that it can not be any other possible thing in the universe.
+The `|` character in that declaration is read as "or".  This says that our data type `Nucleotide` can only be one of those four words, _and nothing else_.  This is called a _sum type_ or sometimes a _tagged union_; I'll call them sum types.  A sum type represents an **exclusive choice** from a set of values.  So in our current example, if I say that the variable `rna` is of the type `Nucleotide` I am making you an _ironclad guarantee_ that it is one of an `Adenine`, a `Guanine`, a `Cytosine`, or a `Thymine`, and that it can not be any other possible thing in the universe.
 
 Those words are now special. They're not strings, they're now actually _values_.  In the example that follows, note that we are **not putting those words in double-quotes**.  Effectively, we have turned them into language keywords in our program - they are _values_.  The fancy term for this type of value is **data constructor** (remember that term, because it's going to appear again in homework 5.)
 
@@ -224,18 +224,18 @@ This lets us define a new function in terms of that data type:
 betterComplement :: Nucleotide -> Nucleotide
 betterComplement Adenine = Thymine
 betterComplement Thymine = Adenine
-betterComplement Cystine = Guanine
-betterComplement Guanine = Cystine
+betterComplement Cytosine = Guanine
+betterComplement Guanine = Cytosine
 ```
 
 Go ahead and replace the betterComplement function in the class REPL with that.
 
 We don't even need a wildcard case here because it's **literally impossible** for us to compile code that feeds in a bad value to this function.  (Our "skin" code - which is not here, because we didn't write it - that converts from things the user types _into_ this data type will still need that wildcard case, and next week we'll introduce the idea of `Maybe` which is how we will handle it).
 
-After clicking "Run" again, typing `betterComplement Cystine` into the REPL to see what happens.  You should get
+After clicking "Run" again, typing `betterComplement Cytosine` into the REPL to see what happens.  You should get
 
 ```
->  betterComplement Cystine
+>  betterComplement Cytosine
 => Guanine
 ```
 
