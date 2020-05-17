@@ -219,7 +219,7 @@ Go ahead and replace the betterComplement function in the class REPL with that.
 
 We don't even need a wildcard case here because it's **literally impossible** for us to compile code that feeds in a bad value to this function.  (Our "skin" code - which is not here, because we didn't write it - that converts from things the user types _into_ this data type will still need that wildcard case, and next week we'll introduce the idea of `Maybe` which is how we will handle it).
 
-Try typing `betterComplement Cystine` into the REPL to see what happens.  You should get
+After clicking "Run" again, typing `betterComplement Cystine` into the REPL to see what happens.  You should get
 
 ```
 >  betterComplement Cystine
