@@ -238,8 +238,8 @@ So to represent a card, we need both a rank **and** a suit, and I haven't shown 
 
 Using a sum type (a type that uses `|` to define alternative values), define two data types:
 
-A `Suit` data type that represents all possible suits.
-A `Rank` data type that represents all possible ranks.
+* A `Suit` data type that represents all possible suits.
+* A `Rank` data type that represents all possible ranks.
 
 If this sounds complicated, you're overthinking it.  Just use simple names for the data constructors.  Data constructors `must` start with a capital letter, and I suggest you don't use funny symbols or numbers.
 
