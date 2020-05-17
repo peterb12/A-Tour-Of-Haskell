@@ -137,7 +137,15 @@ To test your `myFoldr`, try these:
 
 Dr. DeMore has asked you to write a program to let her computer dial her phone for her.  Sadly, her phone system doesn't know how to handle special characters, only numbers, so a number like "(724) 555-1212" confuses it.  Write a function "phoneNumberSimple" which will take a number with punctuation like that and convert it to a number-only string such as "7245551212".
 
-HINT: the Haskell library `Data.Char`, which is already imported and ready for use in our class program, has a useful predicate [isDigit](http://zvon.org/other/haskell/Outputchar/isDigit_f.html).  I've linked to the documntation for it.  You may use this predicate if you want, or write your own.
+HINT: the Haskell library `Data.Char`, which is already imported and ready for use in our class program, has a useful predicate [isDigit](http://zvon.org/other/haskell/Outputchar/isDigit_f.html).  I've linked to the documntation for it - you don't have to do anything difficult here, you can just use `isDigit` as if it's a function you wrote.  After clicking Run, you can test it in the repl:
+
+```
+> isDigit 'a'
+=> False
+> isDigit '9'
+=> True
+```
+You may use this predicate if you want, or write your own.
 
 Don't write this as a recursive function!  Use a higher-order function to do the heavy lifting for you.  The best solution will be just one line.
 
