@@ -215,6 +215,8 @@ After clicking "Run" again, typing `betterComplement Cytosine` into the REPL to 
 
 ## Homework 5: Playing Cards
 
+**IMPORTANT HINT: Your data constructors MUST start with an uppercase letter!  And pure numbers (e.g. "2") won't work.**
+
 A deck of playing cards is composed of 52 playing cards, not counting jokers.
 
 Each card consists of a rank, which can range from Ace, the numbers Two through Ten, or Jack, Queen, or King.
